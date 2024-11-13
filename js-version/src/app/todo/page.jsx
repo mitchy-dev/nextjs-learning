@@ -1,4 +1,15 @@
+import classNames from 'classnames';
 export default function Page() {
+  const classNameLi = classNames(
+'list__item', {
+     'list__item--done': true
+  });
+  const classNameIcon = classNames(
+   'fa', {
+        'fa-circle-thin': true,
+        'fa-check-circle': true,
+        'icon-check': true
+  });
   return (
       <>
         <form className="form">
@@ -12,8 +23,8 @@ export default function Page() {
           <input type="text" className="searchBox__input js-search" defaultValue="" placeholder="something keyword"/>
         </div>
         <ul className="list js-todo-list">
-          <li className="list__item">
-            <i className="fa fa-circle-thin" aria-hidden="true"/>
+          <li className={classNameLi}>
+            <i className={classNameIcon} aria-hidden="true"/>
             <input type="text" className="editText"/>
             <span></span>
             <i className="fa fa-trash icon-trash" aria-hidden="true"/>
