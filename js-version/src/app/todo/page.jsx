@@ -1,15 +1,28 @@
+"use client";
+
 import classNames from 'classnames';
+import {useState} from "react";
 export default function Page() {
-  const classNameLi = classNames(
-'list__item', {
-     'list__item--done': true
-  });
-  const classNameIcon = classNames(
-   'fa', {
-        'fa-circle-thin': true,
-        'fa-check-circle': true,
-        'icon-check': true
-  });
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      text: 'todo1',
+      isEdit: false,
+      isDone: false,
+    },{
+      id: 2,
+      text: 'todo2',
+      isEdit: false,
+      isDone: true,
+    },
+  ]);
+  
+  function handleToggleDone(id, isDone) {
+    setTasks(tasks.map((task) =>
+      task.id === id ? {...task, isDone: !isDone} : task
+    ));
+  }
+
   return (
       <>
         <form className="form">
@@ -23,12 +36,28 @@ export default function Page() {
           <input type="text" className="searchBox__input js-search" defaultValue="" placeholder="something keyword"/>
         </div>
         <ul className="list js-todo-list">
-          <li className={classNameLi}>
-            <i className={classNameIcon} aria-hidden="true"/>
-            <input type="text" className="editText"/>
-            <span></span>
-            <i className="fa fa-trash icon-trash" aria-hidden="true"/>
-          </li>
+          {tasks.map((task) => {
+            const classNameLi = classNames(
+                'list__item', {
+                  'list__item--done': task.isDone
+                });
+            const classNameIcon = classNames(
+                'fa', {
+                  'fa-square-o': !task.isDone,
+                  'fa-check-square': task.isDone,
+                  'icon-check': true
+                });
+            return (
+            <div key={task.id}>
+              <li className={classNameLi}>
+                <i className={classNameIcon} aria-hidden="true"
+                    onClick={() => handleToggleDone(task.id, task.isDone)}/>
+                <input type="text" className="editText"/>
+                <span>{task.text}</span>
+                <i className="fa fa-trash icon-trash" aria-hidden="true"/>
+              </li>
+            </div>
+          )})}
         </ul>
       </>
   );
