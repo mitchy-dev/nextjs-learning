@@ -7,7 +7,7 @@ export default function Page() {
     {
       id: 1,
       text: 'todo1',
-      isEdit: false,
+      isEdit: true,
       isDone: false,
     },{
       id: 2,
@@ -22,6 +22,11 @@ export default function Page() {
       task.id === id ? {...task, isDone: !isDone} : task
     ));
   }
+  // function onConfirmEdit(event, taskId) {
+  //   if (event.keyCode === 13 && event.shiftKey === true) {
+  //
+  //   }
+  // }
 
   return (
       <>
@@ -38,8 +43,8 @@ export default function Page() {
         <ul className="list js-todo-list">
           {tasks.map((task) => {
             const classNameLi = classNames(
-                'list__item', {
-                  'list__item--done': task.isDone
+            'list__item', {
+                 'list__item--done': task.isDone
                 });
             const classNameIcon = classNames(
                 'fa', {
@@ -52,8 +57,10 @@ export default function Page() {
               <li className={classNameLi}>
                 <i className={classNameIcon} aria-hidden="true"
                     onClick={() => handleToggleDone(task.id, task.isDone)}/>
-                <input type="text" className="editText"/>
-                <span>{task.text}</span>
+                {task.isEdit ?
+                  <input type="text" className="editText js-todo_list-editForm" defaultValue={task.text}/>
+                  : <span className="js-todo_list-text">{task.text}</span>
+                }
                 <i className="fa fa-trash icon-trash" aria-hidden="true"/>
               </li>
             </div>
