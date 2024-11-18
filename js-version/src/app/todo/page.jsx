@@ -22,6 +22,11 @@ export default function Page() {
       task.id === id ? {...task, isDone: !isDone} : task
     ));
   }
+  function handleShowEdit(id) {
+    setTasks(tasks.map((task) =>
+      task.id === id ? {...task, isEdit: true} : { ...task, isEdit: false}
+    ));
+  }
   // function onConfirmEdit(event, taskId) {
   //   if (event.keyCode === 13 && event.shiftKey === true) {
   //
@@ -59,7 +64,8 @@ export default function Page() {
                     onClick={() => handleToggleDone(task.id, task.isDone)}/>
                 {task.isEdit ?
                   <input type="text" className="editText js-todo_list-editForm" defaultValue={task.text}/>
-                  : <span className="js-todo_list-text">{task.text}</span>
+                  : <span className="js-todo_list-text"
+                          onClick={() => handleShowEdit(task.id)}>{task.text}</span>
                 }
                 <i className="fa fa-trash icon-trash" aria-hidden="true"/>
               </li>
