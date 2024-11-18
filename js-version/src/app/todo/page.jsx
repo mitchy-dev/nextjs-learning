@@ -27,6 +27,17 @@ export default function Page() {
       task.id === id ? {...task, isEdit: true} : { ...task, isEdit: false}
     ));
   }
+// changeText
+// showEdit
+// closeEdit
+// addTask
+// removeTask
+  function handleRemoveTask(id) {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+// confirmEdit
+//   - changeText
+//   - closeEdit
   // function onConfirmEdit(event, taskId) {
   //   if (event.keyCode === 13 && event.shiftKey === true) {
   //
@@ -67,7 +78,9 @@ export default function Page() {
                   : <span className="js-todo_list-text"
                           onClick={() => handleShowEdit(task.id)}>{task.text}</span>
                 }
-                <i className="fa fa-trash icon-trash" aria-hidden="true"/>
+                <i className="fa fa-trash icon-trash"
+                   aria-hidden="true"
+                    onClick={() => handleRemoveTask(task.id)}/>
               </li>
             </div>
           )})}
