@@ -27,34 +27,43 @@ export default function Page() {
       task.id === id ? {...task, isEdit: true} : { ...task, isEdit: false}
     ));
   }
-// changeText
-// showEdit
-// closeEdit
+  function onChangeText(id, text) {
+    setTasks(tasks.map((task) => task.id === id ? {...task,  text: text} : task));
+    console.log(text);
+  }
 // addTask
-// removeTask
   function handleRemoveTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
   }
-// confirmEdit
-//   - changeText
-//   - closeEdit
-  // function onConfirmEdit(event, taskId) {
-  //   if (event.keyCode === 13 && event.shiftKey === true) {
-  //
-  //   }
-  // }
-
+  function onCloseEdit(id) {
+    setTasks(tasks.map((task) => ({...task, isEdit: false})));
+  }
+  function confirmEdit(event, taskId) {
+    if (event.keyCode === 13 && event.shiftKey === true) {
+      onCloseEdit(taskId);
+      onCloseEdit(taskId);
+    }
+  }
   return (
       <>
         <form className="form">
           <div className="inputArea">
-            <input type="text" className="inputText js-get-val" defaultValue="" placeholder="sothing todo task" />
+            <input
+                type="text"
+                className="inputText js-get-val"
+                defaultValue=""
+                placeholder="sothing todo task"
+            />
             <span className="error js-toggle-error">入力が空です</span>
           </div>
         </form>
         <div className="searchBox">
           <i className="fa fa-search searchBox__icon" aria-hidden="true" />
-          <input type="text" className="searchBox__input js-search" defaultValue="" placeholder="something keyword"/>
+          <input type="text"
+                 className="searchBox__input js-search"
+                 defaultValue=""
+                 placeholder="something keyword"
+          />
         </div>
         <ul className="list js-todo-list">
           {tasks.map((task) => {
@@ -74,7 +83,12 @@ export default function Page() {
                 <i className={classNameIcon} aria-hidden="true"
                     onClick={() => handleToggleDone(task.id, task.isDone)}/>
                 {task.isEdit ?
-                  <input type="text" className="editText js-todo_list-editForm" defaultValue={task.text}/>
+                  <input type="text"
+                         className="editText js-todo_list-editForm"
+                         defaultValue={task.text}
+                         onChange={(e) => onChangeText(task.id, e.target.value)}
+                         onKeyUp={(e) => confirmEdit(e, task.id)}
+                  />
                   : <span className="js-todo_list-text"
                           onClick={() => handleShowEdit(task.id)}>{task.text}</span>
                 }
