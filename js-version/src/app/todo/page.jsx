@@ -44,19 +44,34 @@ export default function Page() {
       onCloseEdit(taskId);
     }
   }
+  function onAddTask(text) {
+    setTasks([...tasks, {
+      id: Date.now(),
+      text: text,
+      isEdit: false,
+      isDone: false,
+    }]);
+  }
+  function handleAddTask(event) {
+    if (event.keyCode === 13 && event.shiftKey === true) {
+      event.preventDefault();
+      onAddTask(event.target.value);
+    }
+  }
   return (
       <>
-        <form className="form">
+        <div className="form">
           <div className="inputArea">
             <input
                 type="text"
                 className="inputText js-get-val"
                 defaultValue=""
-                placeholder="sothing todo task"
+                placeholder="something todo task"
+                onKeyUp={(e) => handleAddTask(e)}
             />
-            <span className="error js-toggle-error">入力が空です</span>
+            {/*{err}*/}
           </div>
-        </form>
+        </div>
         <div className="searchBox">
           <i className="fa fa-search searchBox__icon" aria-hidden="true" />
           <input type="text"
