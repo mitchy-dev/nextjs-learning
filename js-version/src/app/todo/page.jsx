@@ -54,7 +54,6 @@ export default function Page() {
   }
   function handleAddTask(event) {
     if (event.keyCode === 13 && event.shiftKey === true) {
-      event.preventDefault();
       onAddTask(event.target.value);
     }
   }
@@ -67,7 +66,7 @@ export default function Page() {
                 className="inputText js-get-val"
                 defaultValue=""
                 placeholder="something todo task"
-                onKeyUp={(e) => handleAddTask(e)}
+                onKeyUp={handleAddTask}
             />
             {/*{err}*/}
           </div>
