@@ -3,6 +3,7 @@
 import classNames from 'classnames';
 import {useState} from "react";
 export default function Page() {
+  const [keyword, setKeyword] = useState("");
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -57,6 +58,12 @@ export default function Page() {
       onAddTask(event.target.value);
     }
   }
+  function filterTask(task) {
+    const regexp = new RegExp('^' + keyword, 'i');
+    return task.text.match(regexp)
+  }
+  
+  const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => filterTask(task));
   return (
       <>
         <div className="form">
@@ -75,12 +82,13 @@ export default function Page() {
           <i className="fa fa-search searchBox__icon" aria-hidden="true" />
           <input type="text"
                  className="searchBox__input js-search"
-                 defaultValue=""
+                 defaultValue={keyword}
                  placeholder="something keyword"
+                 onChange={(e) => setKeyword(e.target.value)}
           />
         </div>
         <ul className="list js-todo-list">
-          {tasks.map((task) => {
+          {visibleTasks.map((task) => {
             const classNameLi = classNames(
             'list__item', {
                  'list__item--done': task.isDone
