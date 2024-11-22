@@ -3,6 +3,6 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["jest", "@testing-library/jest-dom"]  // 必要
+    "types": ["jest", "@testing-library/jest-dom"]
   }
 }
