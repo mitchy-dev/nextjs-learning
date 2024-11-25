@@ -68,13 +68,15 @@ export default function Page() {
       <>
         <div className="form">
           <div className="inputArea">
-            <input
-                type="text"
-                className="inputText js-get-val"
-                defaultValue=""
-                placeholder="something todo task"
-                onKeyUp={handleAddTask}
-            />
+            <label htmlFor="todo-input">タスクを作成</label>
+              <input
+                  type="text"
+                  id="todo-input"
+                  className="inputText js-get-val"
+                  defaultValue=""
+                  placeholder="something todo task"
+                  onKeyUp={handleAddTask}
+              />
             {/*{err}*/}
           </div>
         </div>
