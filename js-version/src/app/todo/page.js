@@ -32,7 +32,6 @@ export default function Page() {
     setTasks(tasks.map((task) => task.id === id ? {...task,  text: text} : task));
     console.log(text);
   }
-// addTask
   function handleRemoveTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
   }
@@ -54,7 +53,7 @@ export default function Page() {
     }]);
   }
   function handleAddTask(event) {
-    if (event.keyCode === 13 && event.shiftKey === true) {
+    if (event.key === 'Enter') {
       onAddTask(event.target.value);
     }
   }
