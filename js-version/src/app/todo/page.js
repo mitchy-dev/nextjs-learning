@@ -57,12 +57,12 @@ export default function Page() {
       onAddTask(event.target.value);
     }
   }
-  function filterTask(task) {
+  function searchTask(task) {
     const regexp = new RegExp('^' + keyword, 'i');
     return task.text.match(regexp)
   }
   
-  const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => filterTask(task));
+  const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
   return (
       <>
         <div className="form">
@@ -81,7 +81,9 @@ export default function Page() {
         </div>
         <div className="searchBox">
           <i className="fa fa-search searchBox__icon" aria-hidden="true" />
+          <label htmlFor="todo-search">タスクを検索</label>
           <input type="text"
+                 id="todo-search"
                  className="searchBox__input js-search"
                  defaultValue={keyword}
                  placeholder="something keyword"
