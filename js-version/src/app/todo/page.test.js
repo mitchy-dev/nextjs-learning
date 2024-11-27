@@ -1,11 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import {getByRole, render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event"
 
 import Page from "./page";
 
 
 
-describe("ToDoアプリのテスト", () => {
+describe("タスク追加フォーム", () => {
   beforeEach(() => {
     render(<Page />);
   });
@@ -20,5 +20,15 @@ describe("ToDoアプリのテスト", () => {
     await user.type(textbox, 'タスクのテキスト');
     await user.keyboard('{Enter}');
     expect(screen.getByText('タスクのテキスト')).toBeInTheDocument();
+  });
+});
+describe("タスク検索フォーム", () => {
+  beforeEach(() => {
+    render(<Page />);
+  });
+  test("初期表示", () => {
+    const textbox = screen.getByRole('textbox', { name: 'タスクを検索',});
+    expect(textbox).toHaveAttribute('placeholder', 'something keyword');
+    expect(textbox).toHaveValue('');
   });
 });
