@@ -115,6 +115,7 @@ export default function Page() {
                          onKeyUp={(e) => confirmEdit(e, task.id)}
                   />
                   : <span className="js-todo_list-text"
+                          aria-label="タスク名"
                           onClick={() => handleShowEdit(task.id)}>{task.text}</span>
                 }
                 <i className="fa fa-trash icon-trash"
