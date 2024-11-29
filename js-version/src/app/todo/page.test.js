@@ -19,7 +19,9 @@ describe("タスク追加フォーム", () => {
     const user = userEvent.setup();
     await user.type(textbox, 'タスクのテキスト');
     await user.keyboard('{Enter}');
-    expect(screen.getByText('タスクのテキスト')).toBeInTheDocument();
+    //spanタグのaria-labelなどで取得しないと入力値と区別つかない
+    const spanElements = screen.getAllByLabelText('タスク名');
+    expect(spanElements[spanElements.length - 1]).toHaveTextContent('タスクのテキスト');
   });
 });
 describe("タスク検索フォーム", () => {
