@@ -8,7 +8,7 @@ export default function Page() {
     {
       id: 1,
       text: 'todo1',
-      isEdit: true,
+      isEdit: false,
       isDone: false,
     },{
       id: 2,
@@ -103,27 +103,25 @@ export default function Page() {
                   'icon-check': true
                 });
             return (
-            <div key={task.id}>
-              <li className={classNameLi}>
-                <i className={classNameIcon} aria-hidden="true"
-                    onClick={() => handleToggleDone(task.id, task.isDone)}/>
-                {task.isEdit ?
-                  <input type="text"
-                         className="editText js-todo_list-editForm"
-                         defaultValue={task.text}
-                         onChange={(e) => onChangeText(task.id, e.target.value)}
-                         onKeyUp={(e) => confirmEdit(e, task.id)}
-                  />
-                  : <span className="js-todo_list-text"
-                          aria-label="タスク名"
-                          onClick={() => handleShowEdit(task.id)}>{task.text}</span>
-                }
-                <i className="fa fa-trash icon-trash"
-                   aria-hidden="true"
-                    onClick={() => handleRemoveTask(task.id)}/>
-              </li>
-            </div>
-          )})}
+                <li key={task.id} className={classNameLi}>
+                  <i className={classNameIcon} aria-hidden="true"
+                     onClick={() => handleToggleDone(task.id, task.isDone)}/>
+                  {task.isEdit ?
+                      <input type="text"
+                             className="editText js-todo_list-editForm"
+                             defaultValue={task.text}
+                             onChange={(e) => onChangeText(task.id, e.target.value)}
+                             onKeyUp={(e) => confirmEdit(e, task.id)}
+                      />
+                      : <span className="js-todo_list-text"
+                              aria-label="タスク名"
+                              onClick={() => handleShowEdit(task.id)}>{task.text}</span>
+                  }
+                  <i className="fa fa-trash icon-trash"
+                     aria-hidden="true"
+                     onClick={() => handleRemoveTask(task.id)}/>
+                </li>
+            )})}
         </ul>
       </>
   );
