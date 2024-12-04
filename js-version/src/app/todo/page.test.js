@@ -95,11 +95,18 @@ describe("タスクコンポーネント", () => {
   // ユーザー操作：アイコンクリック
   // 課題：liで囲んだ要素の取得方法
   // 答えとしてはgetByRoleで取得できなければgetByLabelText
-  test("タスクの完了状態の切替", async () => {
+  test("未完了のタスクをクリック：完了状態になる", async () => {
     const initialIcon = screen.getAllByLabelText('タスクの完了状態')[0];
+    expect(initialIcon).toHaveClass('fa-square-o');
+    
+    const initialListItem = screen.getAllByRole('listitem')[0];
+    expect(initialListItem).not.toHaveClass('list__item--done');
+    
     const user = userEvent.setup();
     await user.click(initialIcon);
+    
     expect(screen.getAllByLabelText('タスクの完了状態')[0]).toHaveClass('fa-check-square');
+    expect(screen.getAllByRole('listitem')[0]).toHaveClass('list__item--done');
   });
   // 編集モードへの移行:handleShowEdit
   // 入力値の反映:onChangeText

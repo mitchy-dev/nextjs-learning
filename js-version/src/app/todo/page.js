@@ -104,6 +104,7 @@ export default function Page() {
                 });
             return (
                 <li key={task.id} className={classNameLi}>
+                  {/*ToDo buttonタグの追加：aria-hiddenとaria-labelの両方があること矛盾している*/}
                   <i className={classNameIcon}
                      aria-hidden="true"
                      aria-label="タスクの完了状態"
