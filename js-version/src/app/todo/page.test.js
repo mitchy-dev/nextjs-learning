@@ -3,8 +3,6 @@ import userEvent from "@testing-library/user-event"
 
 import Page from "./page";
 
-
-
 describe("タスク追加フォーム", () => {
   beforeEach(() => {
     render(<Page />);
@@ -73,6 +71,38 @@ describe("タスク検索フォーム", () => {
       expect(listItems[key]).toHaveTextContent(expectedTask);
     })
   });
-  
+});
+
+describe("タスクコンポーネント", () => {
+  beforeEach(() => {
+    render(<Page />);
+  });
+  test("初期表示", () => {
+    const expectTasks = ['todo1', 'todo2'];
+    const listItems = screen.getAllByRole('listitem');
     
+    expect(listItems).toHaveLength(expectTasks.length);
+    expectTasks.forEach((expectTask, key) => {
+      expect(listItems[key]).toHaveTextContent(expectTask);
+    })
+  });
+  // タスク完了の切り替え:handleToggleDone
+  // ターゲット li直下のiタグ iタグの取得方法 getBy
+  // 状態 fa-square-o→fa-check-square
+  // 状態変化処理 handleToggleDoneでタスクのisDone: boolプロパティを反転
+  // あまり内部の動作に拘らず、ユーザーの操作の模倣と期待値を先に定義する方が先
+  // 期待値：アイコンの切り替え
+  // ユーザー操作：アイコンクリック
+  // 課題：liで囲んだ要素の取得方法
+  // 答えとしてはgetByRoleで取得できなければgetByLabelText
+  test("タスクの完了状態の切替", async () => {
+    const initialIcon = screen.getAllByLabelText('タスクの完了状態')[0];
+    const user = userEvent.setup();
+    await user.click(initialIcon);
+    expect(screen.getAllByLabelText('タスクの完了状態')[0]).toHaveClass('fa-check-square');
+  });
+  // 編集モードへの移行:handleShowEdit
+  // 入力値の反映:onChangeText
+  // 入力確定:confirmEdit
+  // タスク削除:handleRemoveTask
 });
