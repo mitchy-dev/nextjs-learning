@@ -104,7 +104,9 @@ export default function Page() {
                 });
             return (
                 <li key={task.id} className={classNameLi}>
-                  <i className={classNameIcon} aria-hidden="true"
+                  <i className={classNameIcon}
+                     aria-hidden="true"
+                     aria-label="タスクの完了状態"
                      onClick={() => handleToggleDone(task.id, task.isDone)}/>
                   {task.isEdit ?
                       <input type="text"
