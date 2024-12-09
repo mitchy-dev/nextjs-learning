@@ -109,6 +109,20 @@ describe("タスクコンポーネント", () => {
     expect(screen.getAllByRole('listitem')[0]).toHaveClass('list__item--done');
   });
   // 編集モードへの移行:handleShowEdit
+  test("タスクをクリック：編集モードになる", async () => {
+  //   操作対象：span
+  //   取得：aria-label
+  //   操作：click
+  //   期待値：input:textが出現
+  //   期待値の取得:getByRole, 値はtodo1
+    const taskText = 'todo1';
+    const initialElement = screen.getByText(taskText);
+    
+    const user = userEvent.setup();
+    await user.click(initialElement);
+    
+    expect(screen.getByLabelText('タスク編集')).toHaveValue(taskText);
+  });
   // 入力値の反映:onChangeText
   // 入力確定:confirmEdit
   // タスク削除:handleRemoveTask
