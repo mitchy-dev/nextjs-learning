@@ -115,6 +115,7 @@ export default function Page() {
                              defaultValue={task.text}
                              onChange={(e) => onChangeText(task.id, e.target.value)}
                              onKeyUp={(e) => confirmEdit(e, task.id)}
+                             aria-label="タスク編集"
                       />
                       : <span className="js-todo_list-text"
                               aria-label="タスク名"
