@@ -124,6 +124,19 @@ describe("タスクコンポーネント", () => {
     expect(screen.getByLabelText('タスク編集')).toHaveValue(taskText);
   });
   // 入力値の反映:onChangeText
-  // 入力確定:confirmEdit
+  test("タスクを編集：入力値が反映される", async () => {
+    const initialElement = screen.getByText('todo1');
+    const user = userEvent.setup();
+    await user.click(initialElement);
+    const targetElement = screen.getByLabelText('タスク編集');
+    await user.clear(targetElement);
+    await user.type(targetElement, 'updated');
+    expect(targetElement).toHaveValue('updated'); //タイピングの反映
+    await user.keyboard('{Shift>}{Enter}{/Shift}');
+    expect(targetElement).not.toBeInTheDocument(); //要素の切り替わり
+    const updatedElement = screen.getByText('updated');
+    expect(updatedElement).toHaveProperty('tagName', 'SPAN');
+    expect(updatedElement).toHaveTextContent('updated');
+  });
   // タスク削除:handleRemoveTask
 });
