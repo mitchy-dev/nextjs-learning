@@ -30,7 +30,6 @@ export default function Page() {
   }
   function onChangeText(id, text) {
     setTasks(tasks.map((task) => task.id === id ? {...task,  text: text} : task));
-    console.log(text);
   }
   function handleRemoveTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
@@ -39,8 +38,7 @@ export default function Page() {
     setTasks(tasks.map((task) => ({...task, isEdit: false})));
   }
   function confirmEdit(event, taskId) {
-    if (event.keyCode === 13 && event.shiftKey === true) {
-      onCloseEdit(taskId);
+    if (event.key === 'Enter' && event.shiftKey === true) {
       onCloseEdit(taskId);
     }
   }
