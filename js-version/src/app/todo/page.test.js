@@ -139,4 +139,15 @@ describe("タスクコンポーネント", () => {
     expect(updatedElement).toHaveTextContent('updated');
   });
   // タスク削除:handleRemoveTask
+  test("要素のゴミ箱アイコンクリック：当該要素が削除される", async () => {
+    expect(screen.getByText('todo1')).toBeInTheDocument();
+    expect(screen.getByText('todo2')).toBeInTheDocument();
+    
+    const user = userEvent.setup();
+    const deleteButton = screen.getByLabelText('タスク削除1');
+    await user.click(deleteButton);
+   
+    expect(screen.queryByText('todo1')).not.toBeInTheDocument();
+    expect(screen.getByText('todo2')).toBeInTheDocument();
+  });
 });
