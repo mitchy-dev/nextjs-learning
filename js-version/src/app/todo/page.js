@@ -121,6 +121,7 @@ export default function Page() {
                   }
                   <i className="fa fa-trash icon-trash"
                      aria-hidden="true"
+                     aria-label={`タスク削除${task.id}`}
                      onClick={() => handleRemoveTask(task.id)}/>
                 </li>
             )})}
