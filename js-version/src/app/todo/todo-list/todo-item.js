@@ -8,9 +8,10 @@ TodoItem.propTypes = { //propsの型定義、TS化の際に参考になる
   onToggleDone: PropTypes.func.isRequired,
   onShowEdit: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
+  onDeleteTask: PropTypes.func.isRequired,
 }
 
-export function TodoItem ({id, text, isDone, isEdit, onToggleDone, onShowEdit, onChangeText}) { //型に応じたpropsを渡す
+export function TodoItem ({id, text, isDone, isEdit, onToggleDone, onShowEdit, onChangeText, onDeleteTask}) { //型に応じたpropsを渡す
   return (
       <div>
         {/*呼出*/}
@@ -25,6 +26,9 @@ export function TodoItem ({id, text, isDone, isEdit, onToggleDone, onShowEdit, o
             onChange={(e) => onChangeText(id, e.target.value)}
             aria-label="タスク編集"
         />
+        <i aria-label="タスク削除"
+          onClick={() => onDeleteTask(id)}></i>
       </div>
+      
   );
 }

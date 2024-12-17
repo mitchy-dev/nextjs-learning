@@ -11,6 +11,7 @@ describe("タスクコンポーネント", () => {
     onToggleDone: jest.fn(),
     onShowEdit: jest.fn(),
     onChangeText: jest.fn(),
+    onDeleteTask: jest.fn(),
   };
   beforeEach(() => {
     render(<TodoItem {...mockProps} />); //型に応じたモックデータを渡す
@@ -38,4 +39,10 @@ describe("タスクコンポーネント", () => {
     expect(mockProps.onChangeText).toHaveBeenCalledWith(mockProps.id, 'updated');
   });
 //   ゴミ箱アイコンクリック：当該要素が消える
+  test("ゴミ箱アイコンクリック：当該要素が消える", async () => {
+    const user = userEvent.setup();
+    const trashIcon = screen.getByLabelText('タスク削除');
+    await user.click(trashIcon);
+    expect(mockProps.onDeleteTask).toHaveBeenCalledWith(mockProps.id);
+  });
 });
