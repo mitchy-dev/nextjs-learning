@@ -10,6 +10,7 @@ describe("タスクコンポーネント", () => {
     isDone: false,
     onToggleDone: jest.fn(),
     onShowEdit: jest.fn(),
+    onChangeText: jest.fn(),
   };
   beforeEach(() => {
     render(<TodoItem {...mockProps} />); //型に応じたモックデータを渡す
@@ -23,13 +24,18 @@ describe("タスクコンポーネント", () => {
     await user.click(checkIcon);
     expect(mockProps.onToggleDone).toHaveBeenCalledWith(mockProps.id, mockProps.isDone); //呼出チェック、h1とは異なりユーザーイベントが事前に必要
   });
-//   タスクをクリック：編集モードになる
   test("タスクをクリック：編集モードになる", async () => {
    const displayElement = screen.getByLabelText('タスクのテキスト');
    const user = userEvent.setup();
    await user.click(displayElement);
    expect(mockProps.onShowEdit).toHaveBeenCalledWith(mockProps.id, mockProps.isEdit); //呼出チェック、h1とは異なりユーザーイベントが事前に必要
   });
-//   タスクを編集：入力値が反映される
+  test("タスクを編集：入力値が反映される", async () => {
+    const user = userEvent.setup();
+    const inputElement = screen.getByLabelText('タスク編集');
+    await user.clear(inputElement);
+    await user.type(inputElement, 'updated');
+    expect(mockProps.onChangeText).toHaveBeenCalledWith(mockProps.id, 'updated');
+  });
 //   ゴミ箱アイコンクリック：当該要素が消える
 });
