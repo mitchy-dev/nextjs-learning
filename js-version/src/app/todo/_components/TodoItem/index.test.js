@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import {TodoItem} from "./todo-item";
+import {TodoItem} from "./index";
 import userEvent from "@testing-library/user-event";
 
 describe("タスクコンポーネント", () => {
