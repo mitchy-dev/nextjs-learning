@@ -3,6 +3,7 @@ import {TodoItem} from "./index";
 import userEvent from "@testing-library/user-event";
 
 describe("タスクコンポーネント", () => {
+  let rerender;
   const mockProps = { //型に応じたモックデータ
     id: 1,
     text: 'todo1',
@@ -14,7 +15,8 @@ describe("タスクコンポーネント", () => {
     onDeleteTask: jest.fn(),
   };
   beforeEach(() => {
-    render(<TodoItem {...mockProps} />); //型に応じたモックデータを渡す
+    const result = render(<TodoItem {...mockProps} />); //型に応じたモックデータを渡す
+    rerender = result.rerender;
   });
   test("初期表示", () => {
     expect(screen.getByText(mockProps.text)).toBeInTheDocument(); //呼出チェック
@@ -33,6 +35,9 @@ describe("タスクコンポーネント", () => {
   });
   test("タスクを編集：入力値が反映される", async () => {
     const user = userEvent.setup();
+    await user.click(screen.getByLabelText('タスクのテキスト'));
+    expect(mockProps.onShowEdit).toHaveBeenCalledWith(mockProps.id, mockProps.isEdit);
+    rerender(<TodoItem {...mockProps} isEdit={true} />); //型に応じたモックデータを渡す
     const inputElement = screen.getByLabelText('タスク編集');
     await user.clear(inputElement);
     await user.type(inputElement, 'updated');
