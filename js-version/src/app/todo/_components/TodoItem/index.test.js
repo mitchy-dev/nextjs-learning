@@ -31,12 +31,12 @@ describe("タスクコンポーネント", () => {
    const displayElement = screen.getByLabelText('タスクのテキスト');
    const user = userEvent.setup();
    await user.click(displayElement);
-   expect(mockProps.onShowEdit).toHaveBeenCalledWith(mockProps.id, mockProps.isEdit); //呼出チェック、h1とは異なりユーザーイベントが事前に必要
+   expect(mockProps.onShowEdit).toHaveBeenCalledWith(mockProps.id); //呼出チェック、h1とは異なりユーザーイベントが事前に必要
   });
   test("タスクを編集：入力値が反映される", async () => {
     const user = userEvent.setup();
     await user.click(screen.getByLabelText('タスクのテキスト'));
-    expect(mockProps.onShowEdit).toHaveBeenCalledWith(mockProps.id, mockProps.isEdit);
+    expect(mockProps.onShowEdit).toHaveBeenCalledWith(mockProps.id);
     rerender(<TodoItem {...mockProps} isEdit={true} />); //型に応じたモックデータを渡す
     const inputElement = screen.getByLabelText('タスク編集');
     await user.clear(inputElement);
