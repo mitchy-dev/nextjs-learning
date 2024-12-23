@@ -2,6 +2,7 @@
 
 import classNames from 'classnames';
 import {useState} from "react";
+import {TodoItem} from "@/app/todo/_components/TodoItem";
 export default function Page() {
   const [keyword, setKeyword] = useState("");
   const [tasks, setTasks] = useState([
@@ -89,42 +90,18 @@ export default function Page() {
           />
         </div>
         <ul className="list js-todo-list">
-          {visibleTasks.map((task) => {
-            const classNameLi = classNames(
-            'list__item', {
-                 'list__item--done': task.isDone
-                });
-            const classNameIcon = classNames(
-                'fa', {
-                  'fa-square-o': !task.isDone,
-                  'fa-check-square': task.isDone,
-                  'icon-check': true
-                });
-            return (
-                <li key={task.id} className={classNameLi}>
-                  {/*ToDo buttonタグの追加：aria-hiddenとaria-labelの両方があること矛盾している*/}
-                  <i className={classNameIcon}
-                     aria-hidden="true"
-                     aria-label="タスクの完了状態"
-                     onClick={() => handleToggleDone(task.id, task.isDone)}/>
-                  {task.isEdit ?
-                      <input type="text"
-                             className="editText js-todo_list-editForm"
-                             defaultValue={task.text}
-                             onChange={(e) => onChangeText(task.id, e.target.value)}
-                             onKeyUp={(e) => confirmEdit(e, task.id)}
-                             aria-label="タスク編集"
-                      />
-                      : <span className="js-todo_list-text"
-                              aria-label="タスク名"
-                              onClick={() => handleShowEdit(task.id)}>{task.text}</span>
-                  }
-                  <i className="fa fa-trash icon-trash"
-                     aria-hidden="true"
-                     aria-label={`タスク削除${task.id}`}
-                     onClick={() => handleRemoveTask(task.id)}/>
-                </li>
-            )})}
+          {visibleTasks.map((task) => (
+            <TodoItem
+                onToggleDone={handleToggleDone}
+                onDeleteTask={handleRemoveTask}
+                onChangeText={onChangeText}
+                onShowEdit={handleShowEdit}
+                key={task.id}
+                isEdit={task.isEdit}
+                id={task.id} text={task.text} isDone={task.isDone}
+            />
+            )
+          )}
         </ul>
       </>
   );
