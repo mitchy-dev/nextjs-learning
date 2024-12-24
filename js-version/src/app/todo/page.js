@@ -2,7 +2,7 @@
 
 import classNames from 'classnames';
 import {useState} from "react";
-import {TodoItem} from "@/app/todo/_components/TodoItem";
+import {TodoList} from "@/app/todo/_components/TodoList";
 export default function Page() {
   const [keyword, setKeyword] = useState("");
   const [tasks, setTasks] = useState([
@@ -89,20 +89,14 @@ export default function Page() {
                  onChange={(e) => setKeyword(e.target.value)}
           />
         </div>
-        <ul className="list js-todo-list">
-          {visibleTasks.map((task) => (
-            <TodoItem
-                onToggleDone={handleToggleDone}
-                onDeleteTask={handleRemoveTask}
-                onChangeText={onChangeText}
-                onShowEdit={handleShowEdit}
-                key={task.id}
-                isEdit={task.isEdit}
-                id={task.id} text={task.text} isDone={task.isDone}
-            />
-            )
-          )}
-        </ul>
+        <TodoList
+             // todo 検索機能実装後にvisibleTasksに変更
+            tasks={tasks}
+            onToggleDone={handleToggleDone}
+            onDeleteTask={handleRemoveTask}
+            onChangeText={onChangeText}
+            onShowEdit={handleShowEdit}
+        />
       </>
   );
 }
