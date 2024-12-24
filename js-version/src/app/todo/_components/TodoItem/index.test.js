@@ -2,20 +2,21 @@ import { render, screen } from "@testing-library/react";
 import {TodoItem} from "./index";
 import userEvent from "@testing-library/user-event";
 
+export const mockProps = { //型に応じたモックデータ
+  task: {
+    id: 1,
+    text: 'todo1',
+    isEdit: false,
+    isDone: false,
+  },
+  onToggleDone: jest.fn(),
+  onShowEdit: jest.fn(),
+  onChangeText: jest.fn(),
+  onDeleteTask: jest.fn(),
+};
 describe("タスクコンポーネント", () => {
   let rerender;
-  const mockProps = { //型に応じたモックデータ
-    task: {
-      id: 1,
-      text: 'todo1',
-      isEdit: false,
-      isDone: false,
-    },
-    onToggleDone: jest.fn(),
-    onShowEdit: jest.fn(),
-    onChangeText: jest.fn(),
-    onDeleteTask: jest.fn(),
-  };
+  
   beforeEach(() => {
     const result = render(<TodoItem {...mockProps} />); //型に応じたモックデータを渡す
     rerender = result.rerender;
