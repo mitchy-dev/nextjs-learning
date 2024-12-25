@@ -1,3 +1,10 @@
+
+export const mockTask = {
+  id: 1,
+  text: 'todo1',
+  isEdit: false,
+  isDone: false,
+}
 export const mockTaskActions = {
   onToggleDone: jest.fn(),
   onShowEdit: jest.fn(),
@@ -5,12 +12,7 @@ export const mockTaskActions = {
   onDeleteTask: jest.fn(),
 };
 export const mockProps = { //型に応じたモックデータ
-  task: {
-    id: 1,
-    text: 'todo1',
-    isEdit: false,
-    isDone: false,
-  },
+  task: mockTask,
   ...mockTaskActions
 };
 
