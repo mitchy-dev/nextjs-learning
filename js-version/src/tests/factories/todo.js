@@ -11,13 +11,13 @@ export const mockTaskActions = {
   onChangeText: jest.fn(),
   onDeleteTask: jest.fn(),
 };
-export const mockProps = { //型に応じたモックデータ
+export const mockTodoItemProps = { //型に応じたモックデータ
   task: mockTask,
   ...mockTaskActions
 };
 
 export const mockPropsList = [
-  mockProps.task
+  mockTodoItemProps.task
 ];
 export const emptyTask = [];
 export const multipleTasks = [
