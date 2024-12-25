@@ -1,3 +1,9 @@
+export const mockTaskActions = {
+  onToggleDone: jest.fn(),
+  onShowEdit: jest.fn(),
+  onChangeText: jest.fn(),
+  onDeleteTask: jest.fn(),
+};
 export const mockProps = { //型に応じたモックデータ
   task: {
     id: 1,
@@ -5,10 +11,7 @@ export const mockProps = { //型に応じたモックデータ
     isEdit: false,
     isDone: false,
   },
-  onToggleDone: jest.fn(),
-  onShowEdit: jest.fn(),
-  onChangeText: jest.fn(),
-  onDeleteTask: jest.fn(),
+  ...mockTaskActions
 };
 
 export const mockPropsList = [
@@ -35,9 +38,3 @@ export const multipleTasks = [
     isDone: false,
   },
 ];
-export const defaultProps = {
-  onToggleDone: jest.fn(),
-  onShowEdit: jest.fn(),
-  onChangeText: jest.fn(),
-  onDeleteTask: jest.fn(),
-};
