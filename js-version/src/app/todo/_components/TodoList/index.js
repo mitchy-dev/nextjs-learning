@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 
-import {TodoItem, todoItemPropTypes} from "@/app/todo/_components/TodoItem";
+import {TodoItem} from "@/app/todo/_components/TodoItem";
+import {todoItemPropTypes} from "../types/props";
+
 
 TodoList.propTypes = {
   tasks: PropTypes.arrayOf(todoItemPropTypes.task).isRequired,

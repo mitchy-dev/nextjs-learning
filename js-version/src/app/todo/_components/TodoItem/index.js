@@ -1,22 +1,6 @@
-import PropTypes from "prop-types";
 import classNames from 'classnames';
+import {todoItemPropTypes} from "../types/props";
 
-
-export const todoItemPropTypes   = { //propsの型定義、TS化の際に参考になる
-  task: PropTypes.shape({
-    id: PropTypes.oneOfType([
-      PropTypes.number.isRequired,
-      PropTypes.string.isRequired,
-    ]),
-    text: PropTypes.string.isRequired,
-    isDone: PropTypes.bool.isRequired,
-    isEdit: PropTypes.bool.isRequired,
-  }),
-  onToggleDone: PropTypes.func.isRequired,
-  onShowEdit: PropTypes.func.isRequired,
-  onChangeText: PropTypes.func.isRequired,
-  onDeleteTask: PropTypes.func.isRequired,
-}
 export function TodoItem ({task, onToggleDone, onShowEdit, onChangeText, onDeleteTask}) { //型に応じたpropsを渡す
   const {id, text, isDone, isEdit} = task;
   const classNameLi = classNames(
@@ -51,4 +35,5 @@ export function TodoItem ({task, onToggleDone, onShowEdit, onChangeText, onDelet
   
   );
 }
+
 TodoItem.propTypes = todoItemPropTypes;
