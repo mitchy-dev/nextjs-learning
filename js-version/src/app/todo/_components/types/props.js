@@ -1,23 +1,28 @@
 import PropTypes from "prop-types";
-export const todoItemPropTypes   = {
-  task: PropTypes.shape({
-    id: PropTypes.oneOfType([
-      PropTypes.number.isRequired,
-      PropTypes.string.isRequired,
-    ]),
-    text: PropTypes.string.isRequired,
-    isDone: PropTypes.bool.isRequired,
-    isEdit: PropTypes.bool.isRequired,
-  }),
+
+export const taskShape = {
+  id: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.string.isRequired,
+  ]),
+  text: PropTypes.string.isRequired,
+  isDone: PropTypes.bool.isRequired,
+  isEdit: PropTypes.bool.isRequired,
+};
+
+export const taskPropType = PropTypes.shape(taskShape);
+export const tasksListPropType = PropTypes.arrayOf(taskPropType).isRequired;
+export const taskActionPropTypes = {
   onToggleDone: PropTypes.func.isRequired,
   onShowEdit: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
   onDeleteTask: PropTypes.func.isRequired,
+};
+export const todoItemPropTypes   = {
+  task: taskPropType,
+  ...taskActionPropTypes,
 }
 export const todoListPropTypes = {
-  tasks: PropTypes.arrayOf(todoItemPropTypes.task).isRequired,
-  onToggleDone: todoItemPropTypes.onToggleDone,
-  onShowEdit: todoItemPropTypes.onShowEdit,
-  onChangeText: todoItemPropTypes.onChangeText,
-  onDeleteTask: todoItemPropTypes.onDeleteTask,
+  tasks: tasksListPropType,
+  ...taskActionPropTypes
 }
