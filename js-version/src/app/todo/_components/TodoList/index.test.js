@@ -1,37 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import {TodoList} from "./index";
-import {mockProps} from "../TodoItem/index.test";
+import {multipleTasks, mockPropsList, emptyTask, defaultProps} from "@/tests/factories/todo";
 
-const mockPropsList = [
-    mockProps.task
-];
-const emptyTask = [];
-const multipleTasks = [
-  {
-    id: 1,
-    text: 'todo1',
-    isEdit: false,
-    isDone: false,
-  },
-  {
-    id: 2,
-    text: 'todo2',
-    isEdit: false,
-    isDone: true,
-  },
-  {
-    id: 3,
-    text: 'メモ',
-    isEdit: false,
-    isDone: false,
-  },
-];
-const defaultProps = {
-  onToggleDone: jest.fn(),
-  onShowEdit: jest.fn(),
-  onChangeText: jest.fn(),
-  onDeleteTask: jest.fn(),
-};
 describe("タスクリストコンポーネント", () => {
   test("空のリスト表示", () => {
     render(<TodoList tasks={emptyTask} {...defaultProps} />);
