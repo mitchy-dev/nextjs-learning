@@ -14,3 +14,10 @@ export const todoItemPropTypes   = {
   onChangeText: PropTypes.func.isRequired,
   onDeleteTask: PropTypes.func.isRequired,
 }
+export const todoListPropTypes = {
+  tasks: PropTypes.arrayOf(todoItemPropTypes.task).isRequired,
+  onToggleDone: todoItemPropTypes.onToggleDone,
+  onShowEdit: todoItemPropTypes.onShowEdit,
+  onChangeText: todoItemPropTypes.onChangeText,
+  onDeleteTask: todoItemPropTypes.onDeleteTask,
+}

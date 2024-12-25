@@ -1,16 +1,8 @@
 import PropTypes from "prop-types";
 
 import {TodoItem} from "@/app/todo/_components/TodoItem";
-import {todoItemPropTypes} from "../types/props";
+import {todoListPropTypes} from "../types/props";
 
-
-TodoList.propTypes = {
-  tasks: PropTypes.arrayOf(todoItemPropTypes.task).isRequired,
-  onToggleDone: todoItemPropTypes.onToggleDone,
-  onShowEdit: todoItemPropTypes.onShowEdit,
-  onChangeText: todoItemPropTypes.onChangeText,
-  onDeleteTask: todoItemPropTypes.onDeleteTask,
-}
 export function TodoList ({tasks, onToggleDone, onShowEdit, onChangeText, onDeleteTask}) {
   return (
       <ul className="list js-todo-list">
@@ -27,3 +19,4 @@ export function TodoList ({tasks, onToggleDone, onShowEdit, onChangeText, onDele
       </ul>
   );
 }
+TodoList.propTypes = todoListPropTypes;
