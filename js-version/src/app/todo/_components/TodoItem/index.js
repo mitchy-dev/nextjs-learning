@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import {todoItemPropTypes} from "../types/props";
 
-export function TodoItem ({task, onToggleDone, onShowEdit, onChangeText, onDeleteTask}) { //型に応じたpropsを渡す
+export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
   const {id, text, isDone, isEdit} = task;
+  const {onToggleDone, onShowEdit, onChangeText, onDeleteTask} = handlers;
   const classNameLi = classNames(
    'list__item', {
         'list__item--done': isDone

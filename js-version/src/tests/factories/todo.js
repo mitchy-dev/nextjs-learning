@@ -13,7 +13,7 @@ export const mockTaskActions = {
 };
 export const mockTodoItemProps = { //型に応じたモックデータ
   task: mockTask,
-  ...mockTaskActions
+  handlers: mockTaskActions,
 };
 
 export const mockPropsList = [

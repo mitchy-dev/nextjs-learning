@@ -12,15 +12,15 @@ export const taskShape = {
 
 export const taskPropType = PropTypes.shape(taskShape);
 export const tasksListPropType = PropTypes.arrayOf(taskPropType).isRequired;
-export const taskActionPropTypes = {
-  onToggleDone: PropTypes.func.isRequired,
-  onShowEdit: PropTypes.func.isRequired,
-  onChangeText: PropTypes.func.isRequired,
-  onDeleteTask: PropTypes.func.isRequired,
-};
+export const taskActionPropTypes = PropTypes.shape({
+    onToggleDone: PropTypes.func.isRequired,
+    onShowEdit: PropTypes.func.isRequired,
+    onChangeText: PropTypes.func.isRequired,
+    onDeleteTask: PropTypes.func.isRequired,
+});
 export const todoItemPropTypes   = {
   task: taskPropType,
-  ...taskActionPropTypes,
+  handlers: taskActionPropTypes,
 }
 export const todoListPropTypes = {
   tasks: tasksListPropType,
