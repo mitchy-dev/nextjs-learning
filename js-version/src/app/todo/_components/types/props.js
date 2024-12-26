@@ -24,5 +24,5 @@ export const todoItemPropTypes   = {
 }
 export const todoListPropTypes = {
   tasks: tasksListPropType,
-  ...taskActionPropTypes
+  handlers: taskActionPropTypes,
 }
