@@ -17,7 +17,7 @@ describe("タスクコンポーネント", () => {
     const checkIcon = screen.getByLabelText('タスクの完了状態');
     const user = userEvent.setup();
     await user.click(checkIcon);
-    expect(mockTodoItemProps.onToggleDone).toHaveBeenCalledWith(mockTodoItemProps.task.id, mockTodoItemProps.task.isDone); //呼出チェック、h1とは異なりユーザーイベントが事前に必要
+    expect(mockTodoItemProps.handlers.onToggleDone).toHaveBeenCalledWith(mockTodoItemProps.task.id, mockTodoItemProps.task.isDone); //呼出チェック、h1とは異なりユーザーイベントが事前に必要
   });
   test("タスクをクリック：編集モードになる", async () => {
    const displayElement = screen.getByLabelText('タスクのテキスト');
@@ -41,6 +41,6 @@ describe("タスクコンポーネント", () => {
     const user = userEvent.setup();
     const trashIcon = screen.getByLabelText('タスク削除');
     await user.click(trashIcon);
-    expect(mockTodoItemProps.handlers.onDeleteTask).toHaveBeenCalledWith(mockTodoItemProps.task.id);
+    expect(mockTodoItemProps.handlers.onRemoveTask).toHaveBeenCalledWith(mockTodoItemProps.task.id);
   });
 });

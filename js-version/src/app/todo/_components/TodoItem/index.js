@@ -3,7 +3,7 @@ import {todoItemPropTypes} from "../types/props";
 
 export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
   const {id, text, isDone, isEdit} = task;
-  const {onToggleDone, onShowEdit, onChangeText, onDeleteTask} = handlers;
+  const {onToggleDone, onShowEdit, onChangeText, onRemoveTask} = handlers;
   const classNameLi = classNames(
    'list__item', {
         'list__item--done': isDone
@@ -31,7 +31,7 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
           }
         <i className="fa fa-trash icon-trash"
            aria-label="タスク削除"
-           onClick={() => onDeleteTask(id)} />
+           onClick={() => onRemoveTask(id)} />
       </li>
   
   );

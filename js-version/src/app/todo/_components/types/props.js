@@ -16,7 +16,8 @@ export const taskActionPropTypes = PropTypes.shape({
     onToggleDone: PropTypes.func.isRequired,
     onShowEdit: PropTypes.func.isRequired,
     onChangeText: PropTypes.func.isRequired,
-    onDeleteTask: PropTypes.func.isRequired,
+    onRemoveTask: PropTypes.func.isRequired,
+  
 });
 export const todoItemPropTypes   = {
   task: taskPropType,

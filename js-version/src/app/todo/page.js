@@ -1,6 +1,5 @@
 "use client";
 
-import classNames from 'classnames';
 import {useState} from "react";
 import {TodoList} from "@/app/todo/_components/TodoList";
 export default function Page() {
@@ -65,7 +64,7 @@ export default function Page() {
     onToggleDone: handleToggleDone,
     onShowEdit: handleShowEdit,
     onChangeText: handleChangeText,
-    onDeleteTask: handleRemoveTask,
+    onRemoveTask: handleRemoveTask,
   };
   
   const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
