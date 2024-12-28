@@ -29,7 +29,7 @@ export default function Page() {
       task.id === id ? {...task, isEdit: true} : { ...task, isEdit: false}
     ));
   }
-  function onChangeText(id, text) {
+  function handleChangeText(id, text) {
     setTasks(tasks.map((task) => task.id === id ? {...task,  text: text} : task));
   }
   function handleRemoveTask(id) {
@@ -60,6 +60,13 @@ export default function Page() {
     const regexp = new RegExp('^' + keyword, 'i');
     return task.text.match(regexp)
   }
+  
+  const handlers = {
+    onToggleDone: handleToggleDone,
+    onShowEdit: handleShowEdit,
+    onChangeText: handleChangeText,
+    onDeleteTask: handleRemoveTask,
+  };
   
   const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
   return (
@@ -92,10 +99,7 @@ export default function Page() {
         <TodoList
              // todo 検索機能実装後にvisibleTasksに変更
             tasks={tasks}
-            onToggleDone={handleToggleDone}
-            onDeleteTask={handleRemoveTask}
-            onChangeText={onChangeText}
-            onShowEdit={handleShowEdit}
+            handlers={handlers}
         />
       </>
   );

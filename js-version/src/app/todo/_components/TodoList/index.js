@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import {TodoItem} from "@/app/todo/_components/TodoItem";
 import {todoListPropTypes} from "../types/props";
 
