@@ -19,13 +19,13 @@ export const mockTodoHandlers = {
   onChangeText: jest.fn(),
   onRemoveTask: jest.fn(),
 };
-export const mockTodoItemProps = { //型に応じたモックデータ
-  task: createMockTask(),
+export const createMockTodoItemProps = (taskOverrides = {}) => ({ //型に応じたモックデータ
+  task: createMockTask(taskOverrides),
   handlers: mockTodoHandlers,
-};
+});
 
 export const mockPropsList = [
-  mockTodoItemProps.task
+  createMockTodoItemProps().task
 ];
 export const emptyTask = [];
 export const multipleTasks = [
