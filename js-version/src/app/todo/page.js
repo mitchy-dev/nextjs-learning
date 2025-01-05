@@ -34,12 +34,12 @@ export default function Page() {
   function handleRemoveTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
   }
-  function onCloseEdit(id) {
+  function handleCloseEdit(id) {
     setTasks(tasks.map((task) => ({...task, isEdit: false})));
   }
   function confirmEdit(event, taskId) {
     if (event.key === 'Enter' && event.shiftKey === true) {
-      onCloseEdit(taskId);
+      handleCloseEdit(taskId);
     }
   }
   function onAddTask(text) {

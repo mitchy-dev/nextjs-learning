@@ -12,7 +12,7 @@ export const taskShape = {
 
 export const taskPropType = PropTypes.shape(taskShape);
 export const tasksListPropType = PropTypes.arrayOf(taskPropType).isRequired;
-export const taskActionPropTypes = PropTypes.shape({
+export const todoHandlersPropTypes = PropTypes.shape({
     onToggleDone: PropTypes.func.isRequired,
     onShowEdit: PropTypes.func.isRequired,
     onChangeText: PropTypes.func.isRequired,
@@ -21,9 +21,9 @@ export const taskActionPropTypes = PropTypes.shape({
 });
 export const todoItemPropTypes   = {
   task: taskPropType,
-  handlers: taskActionPropTypes,
+  handlers: todoHandlersPropTypes,
 }
 export const todoListPropTypes = {
   tasks: tasksListPropType,
-  handlers: taskActionPropTypes,
+  handlers: todoHandlersPropTypes,
 }

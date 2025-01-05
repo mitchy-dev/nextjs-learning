@@ -5,7 +5,7 @@ export const mockTask = {
   isEdit: false,
   isDone: false,
 }
-export const mockTaskActions = {
+export const mockTodoHandlers = {
   onToggleDone: jest.fn(),
   onShowEdit: jest.fn(),
   onChangeText: jest.fn(),
@@ -13,7 +13,7 @@ export const mockTaskActions = {
 };
 export const mockTodoItemProps = { //型に応じたモックデータ
   task: mockTask,
-  handlers: mockTaskActions,
+  handlers: mockTodoHandlers,
 };
 
 export const mockPropsList = [
