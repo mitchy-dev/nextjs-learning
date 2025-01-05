@@ -1,8 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import {TodoList} from "./index";
 import {multipleTasks, mockPropsList, emptyTask, mockTodoHandlers} from "@/tests/factories/todo";
+import PropTypes from "prop-types";
+import {tasksListPropType} from "@/app/todo/_components/types/props";
 
 describe("タスクリストコンポーネント", () => {
+  test("モックデータの型チェック", () => {
+    const mockProps = multipleTasks;
+    expect(PropTypes.checkPropTypes(
+{ tasks: tasksListPropType,},
+   { tasks: mockProps,},
+  'props'
+    ));
+  });
   test("空のリスト表示", () => {
     render(<TodoList tasks={emptyTask} handlers={mockTodoHandlers} />);
     expect(screen.getByRole('list')).toBeInTheDocument();

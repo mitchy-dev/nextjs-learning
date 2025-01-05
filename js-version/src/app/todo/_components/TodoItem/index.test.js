@@ -1,7 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import {TodoItem} from "./index";
 import userEvent from "@testing-library/user-event";
+import PropTypes from "prop-types";
+
 import {createMockTodoItemProps} from "@/tests/factories/todo";
+import {TodoItem} from "./index";
+import {taskPropType, taskShape, todoHandlersPropTypes} from "@/app/todo/_components/types/props";
 
 describe("タスクコンポーネント", () => {
   let rerender;
@@ -9,6 +12,20 @@ describe("タスクコンポーネント", () => {
   beforeEach(() => {
     const result = render(<TodoItem {...createMockTodoItemProps()} />); //型に応じたモックデータを渡す
     rerender = result.rerender;
+  });
+  test("モックデータの型チェック", () => {
+    const mockProps = createMockTodoItemProps();
+     expect(PropTypes.checkPropTypes(
+     { task: taskPropType },
+        { task: mockProps.task },
+       'prop',
+'TodoItem'
+      )).toBeUndefined();
+     expect(PropTypes.checkPropTypes(
+     { handlers: todoHandlersPropTypes,},
+        { handlers: mockProps.handlers,},
+       'prop'
+     )).toBeUndefined();
   });
   test("初期表示", () => {
     expect(screen.getByText(createMockTodoItemProps().task.text)).toBeInTheDocument(); //呼出チェック
