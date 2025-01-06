@@ -53,7 +53,21 @@ describe("タスクコンポーネント", () => {
     await user.type(inputElement, 'updated');
     expect(createMockTodoItemProps().handlers.onChangeText).toHaveBeenCalledWith(createMockTodoItemProps().task.id, 'updated');
   });
-//   ゴミ箱アイコンクリック：当該要素が消える
+  test("タスク編集中にEnter：入力確定", async () => {
+    const user = userEvent.setup();
+    const props = createMockTodoItemProps({isEdit: true});
+    
+    rerender(<TodoItem {...props} /> );
+    const inputElement = screen.getByLabelText('タスク編集');
+    await user.type(inputElement,'{Enter}');
+    expect(props.handlers.onConfirmEdit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          key: 'Enter',
+          type: 'keyup',
+        }),
+        props.task.id
+    );
+  });
   test("ゴミ箱アイコンクリック：当該要素が消える", async () => {
     const user = userEvent.setup();
     const trashIcon = screen.getByLabelText('タスク削除');

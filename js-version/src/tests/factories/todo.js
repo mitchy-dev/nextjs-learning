@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 
 export const mockTask = {
   id: 1,
@@ -18,6 +19,7 @@ export const mockTodoHandlers = {
   onShowEdit: jest.fn(),
   onChangeText: jest.fn(),
   onRemoveTask: jest.fn(),
+  onConfirmEdit: jest.fn(),
 };
 export const createMockTodoItemProps = (taskOverrides = {}) => ({ //型に応じたモックデータ
   task: createMockTask(taskOverrides),

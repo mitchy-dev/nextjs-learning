@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import {todoItemPropTypes} from "../types/props";
+import PropTypes from "prop-types";
 
 export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
   const {id, text, isDone, isEdit} = task;
-  const {onToggleDone, onShowEdit, onChangeText, onRemoveTask} = handlers;
+  const {onToggleDone, onShowEdit, onChangeText, onRemoveTask, onConfirmEdit,} = handlers;
   const classNameLi = classNames(
    'list__item', {
         'list__item--done': isDone
@@ -23,8 +24,9 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
             <input
                 type="text"
                 defaultValue={text}
-                onChange={(e) => onChangeText(id, e.target.value)}
                 aria-label="タスク編集"
+                onChange={(e) => onChangeText(id, e.target.value)}
+                onKeyUp={(e) => onConfirmEdit(e, id)}
             /> :
             <span aria-label="タスクのテキスト"
                   onClick={() => onShowEdit(id)}>{text}</span>

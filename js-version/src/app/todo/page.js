@@ -37,8 +37,8 @@ export default function Page() {
   function handleCloseEdit(id) {
     setTasks(tasks.map((task) => ({...task, isEdit: false})));
   }
-  function confirmEdit(event, taskId) {
-    if (event.key === 'Enter' && event.shiftKey === true) {
+  function handleConfirmEdit(event, taskId) {
+    if (event.key === 'Enter') {
       handleCloseEdit(taskId);
     }
   }
@@ -65,6 +65,7 @@ export default function Page() {
     onShowEdit: handleShowEdit,
     onChangeText: handleChangeText,
     onRemoveTask: handleRemoveTask,
+    onConfirmEdit: handleConfirmEdit
   };
   
   const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
