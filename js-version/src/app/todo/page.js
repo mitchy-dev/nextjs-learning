@@ -2,30 +2,16 @@
 
 import {useState} from "react";
 import {TodoList} from "@/app/todo/_components/TodoList";
-export default function Page() {
-  const [keyword, setKeyword] = useState("");
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: 'todo1',
-      isEdit: false,
-      isDone: false,
-    },{
-      id: 2,
-      text: 'todo2',
-      isEdit: false,
-      isDone: true,
-    },
-  ]);
-  
+
+const useTodoHandlers = (tasks, setTasks) => {
   function handleToggleDone(id, isDone) {
     setTasks(tasks.map((task) =>
-      task.id === id ? {...task, isDone: !isDone} : task
+        task.id === id ? {...task, isDone: !isDone} : task
     ));
   }
   function handleShowEdit(id) {
     setTasks(tasks.map((task) =>
-      task.id === id ? {...task, isEdit: true} : { ...task, isEdit: false}
+        task.id === id ? {...task, isEdit: true} : { ...task, isEdit: false}
     ));
   }
   function handleChangeText(id, text) {
@@ -42,6 +28,32 @@ export default function Page() {
       handleCloseEdit(taskId);
     }
   }
+  
+  return {
+    onToggleDone: handleToggleDone,
+    onShowEdit: handleShowEdit,
+    onChangeText: handleChangeText,
+    onRemoveTask: handleRemoveTask,
+    onConfirmEdit: handleConfirmEdit
+  };
+};
+export default function Page() {
+  const [keyword, setKeyword] = useState("");
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      text: 'todo1',
+      isEdit: false,
+      isDone: false,
+    },{
+      id: 2,
+      text: 'todo2',
+      isEdit: false,
+      isDone: true,
+    },
+  ]);
+  
+  const handlers = useTodoHandlers(tasks, setTasks);
   function onAddTask(text) {
     setTasks([...tasks, {
       id: Date.now(),
@@ -60,13 +72,6 @@ export default function Page() {
     return task.text.match(regexp)
   }
   
-  const handlers = {
-    onToggleDone: handleToggleDone,
-    onShowEdit: handleShowEdit,
-    onChangeText: handleChangeText,
-    onRemoveTask: handleRemoveTask,
-    onConfirmEdit: handleConfirmEdit
-  };
   
   const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
   return (
