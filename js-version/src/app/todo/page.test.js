@@ -14,12 +14,12 @@ describe("タスク追加フォーム", () => {
   });
   test("タスク追加", async () => {
     const textbox = screen.getByRole('textbox', { name: 'タスクを作成',});
+    const initialTasksCount = screen.getAllByLabelText('タスクのテキスト').length;
     const user = userEvent.setup();
-    await user.type(textbox, 'タスクのテキスト');
+    await user.type(textbox, 'タスク追加');
     await user.keyboard('{Enter}');
-    //spanタグのaria-labelなどで取得しないと入力値と区別つかない
-    const spanElements = screen.getAllByLabelText('タスク名');
-    expect(spanElements[spanElements.length - 1]).toHaveTextContent('タスクのテキスト');
+    expect(screen.getAllByLabelText('タスクのテキスト')).toHaveLength(initialTasksCount + 1);
+    expect(screen.getByText('タスク追加')).toBeInTheDocument();
   });
 });
 describe("タスク検索フォーム", () => {

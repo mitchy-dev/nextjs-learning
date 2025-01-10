@@ -27,3 +27,6 @@ export const todoListPropTypes = {
   tasks: tasksListPropType,
   handlers: todoHandlersPropTypes,
 }
+export const todoInputPropTypes = {
+  onAddTask: PropTypes.func.isRequired,
+};

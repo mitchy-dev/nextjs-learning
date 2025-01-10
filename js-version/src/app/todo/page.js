@@ -3,6 +3,7 @@
 import {useState} from "react";
 import {TodoList} from "@/app/todo/_components/TodoList";
 import {useTodoHandlers} from "@/app/todo/_hooks/useTodos/index";
+import {TodoInput} from "@/app/todo/_components/TodoInput";
 
 
 export default function Page() {
@@ -44,20 +45,7 @@ export default function Page() {
   const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
   return (
       <>
-        <div className="form">
-          <div className="inputArea">
-            <label htmlFor="todo-input">タスクを作成</label>
-              <input
-                  type="text"
-                  id="todo-input"
-                  className="inputText js-get-val"
-                  defaultValue=""
-                  placeholder="something todo task"
-                  onKeyUp={handleAddTask}
-              />
-            {/*{err}*/}
-          </div>
-        </div>
+        <TodoInput onAddTask={handleAddTask} />
         <div className="searchBox">
           <i className="fa fa-search searchBox__icon" aria-hidden="true" />
           <label htmlFor="todo-search">タスクを検索</label>

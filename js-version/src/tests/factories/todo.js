@@ -21,6 +21,9 @@ export const mockTodoHandlers = {
   onRemoveTask: jest.fn(),
   onConfirmEdit: jest.fn(),
 };
+
+export const mockAddTask = jest.fn();
+
 export const createMockTodoItemProps = (taskOverrides = {}) => ({ //型に応じたモックデータ
   task: createMockTask(taskOverrides),
   handlers: mockTodoHandlers,
