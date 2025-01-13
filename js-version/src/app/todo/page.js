@@ -23,7 +23,7 @@ export default function Page() {
   ]);
   
   const handlers = useTodoHandlers(tasks, setTasks);
-  function onAddTask(text) {
+  function addTask(text) {
     setTasks([...tasks, {
       id: Date.now(),
       text: text,
@@ -31,9 +31,9 @@ export default function Page() {
       isDone: false,
     }]);
   }
-  function handleAddTask(event) {
+  function handleSubmit(event) {
     if (event.key === 'Enter') {
-      onAddTask(event.target.value);
+      addTask(event.target.value);
     }
   }
   function searchTask(task) {
@@ -45,7 +45,7 @@ export default function Page() {
   const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
   return (
       <>
-        <TodoInput onAddTask={handleAddTask} />
+        <TodoInput onAddTask={handleSubmit} />
         <div className="searchBox">
           <i className="fa fa-search searchBox__icon" aria-hidden="true" />
           <label htmlFor="todo-search">タスクを検索</label>
