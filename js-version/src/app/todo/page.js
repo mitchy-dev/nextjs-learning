@@ -45,7 +45,7 @@ export default function Page() {
   const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
   return (
       <>
-        <TodoInput onAddTask={handleSubmit} />
+        <TodoInput onSubmit={handleSubmit} />
         <div className="searchBox">
           <i className="fa fa-search searchBox__icon" aria-hidden="true" />
           <label htmlFor="todo-search">タスクを検索</label>

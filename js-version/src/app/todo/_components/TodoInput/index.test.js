@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 
 describe("タスク作成コンポーネント", () => {
   test("初期表示", () => {
-     render(<TodoInput onAddTask={mockAddTask} />);
+     render(<TodoInput onSubmit={mockAddTask} />);
      const textbox = screen.getByRole('textbox');
      expect(textbox).toBeInTheDocument();
      expect(screen.getByLabelText('タスクを作成')).toBeInTheDocument();
@@ -14,7 +14,7 @@ describe("タスク作成コンポーネント", () => {
      
   });
   test("keyupで関数呼び出し", async () => {
-    render(<TodoInput onAddTask={mockAddTask} />);
+    render(<TodoInput onSubmit={mockAddTask} />);
     const user = userEvent.setup();
     const inputElement = screen.getByRole('textbox');
     await user.type(inputElement, 'type');

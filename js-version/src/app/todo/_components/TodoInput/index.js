@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import {todoInputPropTypes} from "../types/props";
 
-export function TodoInput ({onAddTask}) {
+export function TodoInput ({ onSubmit}) {
   return (
       <div className="form">
         <div className="inputArea">
@@ -12,7 +12,7 @@ export function TodoInput ({onAddTask}) {
               className="inputText js-get-val"
               defaultValue=""
               placeholder="something todo task"
-              onKeyUp={onAddTask}
+              onKeyUp={ onSubmit}
           />
           {/*{err}*/}
         </div>
