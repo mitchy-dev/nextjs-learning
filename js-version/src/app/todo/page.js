@@ -2,8 +2,9 @@
 
 import {useState} from "react";
 import {TodoList} from "@/app/todo/_components/TodoList";
-import {useTodoHandlers} from "@/app/todo/_hooks/useTodos/index";
+import {useTodoHandlers} from "@/app/todo/_hooks/useTodos";
 import {TodoInput} from "@/app/todo/_components/TodoInput";
+import {TodoSearch} from "@/app/todo/_components/TodoSearch";
 
 
 export default function Page() {
@@ -38,7 +39,7 @@ export default function Page() {
   }
   function searchTask(task) {
     const regexp = new RegExp('^' + keyword, 'i');
-    return task.text.match(regexp)
+    return task.text.match(regexp);
   }
   
   
@@ -46,20 +47,9 @@ export default function Page() {
   return (
       <>
         <TodoInput onSubmit={handleSubmit} />
-        <div className="searchBox">
-          <i className="fa fa-search searchBox__icon" aria-hidden="true" />
-          <label htmlFor="todo-search">タスクを検索</label>
-          <input type="text"
-                 id="todo-search"
-                 className="searchBox__input js-search"
-                 defaultValue={keyword}
-                 placeholder="something keyword"
-                 onChange={(e) => setKeyword(e.target.value)}
-          />
-        </div>
+        <TodoSearch onChange={setKeyword} defaultValue={keyword} />
         <TodoList
-             // todo 検索機能実装後にvisibleTasksに変更
-            tasks={tasks}
+            tasks={visibleTasks}
             handlers={handlers}
         />
       </>

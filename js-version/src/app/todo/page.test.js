@@ -71,6 +71,15 @@ describe("タスク検索フォーム", () => {
       expect(listItems[key]).toHaveTextContent(expectedTask);
     })
   });
+  test("todo1と入力するとtodo1のみ表示される", async () => {
+    const textbox = screen.getByRole('textbox', { name: 'タスクを検索',});
+    const user = userEvent.setup();
+    await user.clear(textbox);
+    await user.type(textbox, 'todo1');
+    expect(screen.getAllByRole('listitem')).toHaveLength(1);
+    expect(screen.getByText('todo1')).toBeInTheDocument();
+    expect(screen.queryByText('todo2')).not.toBeInTheDocument();
+  });
 });
 
 describe("タスクコンポーネント", () => {

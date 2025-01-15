@@ -30,3 +30,8 @@ export const todoListPropTypes = {
 export const todoInputPropTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
+
+export const todoSearchPropTypes = {
+  onChange: PropTypes.func.isRequired,
+  defaultValue: PropTypes.string
+};
