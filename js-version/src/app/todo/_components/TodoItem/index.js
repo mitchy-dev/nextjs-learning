@@ -7,7 +7,7 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
   const {onToggleDone, onShowEdit, onChangeText, onRemoveTask, onConfirmEdit,} = handlers;
   const classNameLi = classNames(
    'list__item', {
-        'list__item--done': isDone
+        'is-done': isDone
       });
   const classNameIcon = classNames(
     'fa', 'icon-check', {

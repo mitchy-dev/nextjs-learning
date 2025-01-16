@@ -199,7 +199,7 @@ body{
   transform: scale(1.02);
   transition: .5s transform;
 }
-.list__item--done{
+.list__item.is-done{
   background: #e5e5e5;
   color: #888888;
 }
