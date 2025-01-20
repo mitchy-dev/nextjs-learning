@@ -1,9 +1,10 @@
 import {todoSearchPropTypes} from "../types/props";
+import {Search} from "lucide-react";
 export function TodoSearch ({ defaultValue, onChange }) {
   
   return (
       <div className="searchBox">
-        <i className="fa fa-search searchBox__icon" aria-hidden="true"/>
+        <Search className="searchBox__icon" aria-hidden="true" />
         <label htmlFor="todo-search">タスクを検索</label>
         <input type="text"
                id="todo-search"
