@@ -6,7 +6,7 @@ export function TodoSearch ({ defaultValue, onChange }) {
       <div className="searchBox">
         <Search className="searchBox__icon" aria-hidden="true" />
         <label htmlFor="todo-search" className="visually-hidden">タスクを検索</label>
-        <input type="text"
+        <input type="search"
                id="todo-search"
                className="searchBox__input js-search"
                defaultValue={defaultValue}
