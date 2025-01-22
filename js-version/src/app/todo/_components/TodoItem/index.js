@@ -32,7 +32,7 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
                   onClick={() => onShowEdit(id)}>{text}</span>
           }
         <i className="fa fa-trash icon-trash"
-           aria-label="タスク削除"
+           aria-label={`タスク削除${id}`}
            onClick={() => onRemoveTask(id)} />
       </li>
   

@@ -109,13 +109,13 @@ describe("タスクコンポーネント", () => {
     expect(initialIcon).toHaveClass('fa-square-o');
     
     const initialListItem = screen.getAllByRole('listitem')[0];
-    expect(initialListItem).not.toHaveClass('list__item--done');
+    expect(initialListItem).not.toHaveClass('is-done');
     
     const user = userEvent.setup();
     await user.click(initialIcon);
     
     expect(screen.getAllByLabelText('タスクの完了状態')[0]).toHaveClass('fa-check-square');
-    expect(screen.getAllByRole('listitem')[0]).toHaveClass('list__item--done');
+    expect(screen.getAllByRole('listitem')[0]).toHaveClass('is-done');
   });
   // 編集モードへの移行:handleShowEdit
   test("タスクをクリック：編集モードになる", async () => {

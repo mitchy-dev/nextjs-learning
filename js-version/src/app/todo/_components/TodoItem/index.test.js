@@ -70,7 +70,7 @@ describe("タスクコンポーネント", () => {
   });
   test("ゴミ箱アイコンクリック：当該要素が消える", async () => {
     const user = userEvent.setup();
-    const trashIcon = screen.getByLabelText('タスク削除');
+    const trashIcon = screen.getByLabelText('タスク削除1');
     await user.click(trashIcon);
     expect(createMockTodoItemProps().handlers.onRemoveTask).toHaveBeenCalledWith(createMockTodoItemProps().task.id);
   });
