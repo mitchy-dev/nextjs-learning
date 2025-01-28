@@ -34,12 +34,15 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
             /> :
             <span aria-label={t('textLabel')}
                   onClick={() => onShowEdit(id)}>{text}</span>
-          }
-        <Trash2
-          className="icon-trash"
+        }
+        <button
+          type="button"
+          className="icon-button icon-button--trash"
           aria-label={t('deleteLabel', {id})}
           onClick={() => onRemoveTask(id)}
-        />
+        >
+          <Trash2 className="icon-trash"/>
+        </button>
       </li>
   
   );
