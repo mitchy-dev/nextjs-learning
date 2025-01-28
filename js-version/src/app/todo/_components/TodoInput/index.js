@@ -12,7 +12,7 @@ export function TodoInput ({ onSubmit}) {
           <input
               type="text"
               id="todo-input"
-              className="inputText js-get-val"
+              className="inputText"
               defaultValue=""
               placeholder={t('placeholder')}
               onKeyUp={ onSubmit}

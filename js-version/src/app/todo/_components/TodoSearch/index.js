@@ -10,7 +10,7 @@ export function TodoSearch ({ defaultValue, onChange }) {
         <label htmlFor="todo-search" className="visually-hidden">{t('label')}</label>
         <input type="search"
                id="todo-search"
-               className="searchBox__input js-search"
+               className="searchBox__input"
                defaultValue={defaultValue}
                placeholder={t('placeholder')}
                onChange={(e) => onChange(e.target.value)}
