@@ -16,12 +16,14 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
   const CheckBoxIcon = isDone ? SquareCheck : Square;
   return (
       <li key={id} className={classNameLi}>
-       {/*ToDo buttonタグの追加:iタグでbutton代用しているため*/}
-          <CheckBoxIcon
-            className="icon-check icon-square"
-            aria-label={t('completeLabel')}
-            onClick={() => onToggleDone(id, isDone)}
-          />
+        <button
+          type="button"
+          className="icon-button"
+          aria-label={t('completeLabel')}
+          onClick={() => onToggleDone(id, isDone)}
+        >
+          <CheckBoxIcon className="icon-check icon-square"/>
+        </button>
         {isEdit ?
             <input
                 type="text"
