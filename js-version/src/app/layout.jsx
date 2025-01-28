@@ -19,12 +19,6 @@ export default async function RootLayout({ children }) {
   
   return (
     <html lang={locale}>
-    <head>
-      <Script
-        src="https://use.fontawesome.com/e3ae05b8e6.js"
-        strategy="beforeInteractive"
-      />
-    </head>
     <body className={inter.className}>
       <NextIntlClientProvider messages={messages}>
         {children}
