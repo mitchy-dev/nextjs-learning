@@ -29,7 +29,8 @@
     "eslint-config-next": "14.1.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "sass": "^1.83.4"
   },
   "volta": {
     "node": "18.17.0"
