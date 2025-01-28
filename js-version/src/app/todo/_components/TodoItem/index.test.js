@@ -6,7 +6,7 @@ import messages from '@messages/ja.json'
 import { render } from "@/test/test-utils"
 import {createMockTodoItemProps} from "@/tests/factories/todo";
 import {TodoItem} from "./index";
-import {taskPropType, taskShape, todoHandlersPropTypes} from "@/app/todo/_components/types/props";
+import {taskPropType, todoHandlersPropTypes} from "@/app/todo/_components/types/props";
 
 describe("タスクコンポーネント", () => {
   let rerender;

@@ -1,6 +1,7 @@
+import { Square, SquareCheck, Trash2 } from 'lucide-react';
+
 import classNames from 'classnames';
 import {useTranslations} from 'next-intl';
-
 import {todoItemPropTypes} from "../types/props";
 
 export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
@@ -12,19 +13,21 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
    'list__item', {
         'is-done': isDone
       });
-  const classNameIcon = classNames(
-    //   todo lucideに変更
-    'fa', 'icon-check', {
-         'fa-square-o': !isDone,
-         'fa-check-square': isDone,
-      });
   return (
       <li key={id} className={classNameLi}>
        {/*ToDo buttonタグの追加:iタグでbutton代用しているため*/}
-        {/* todo 文言をja.jsonに移行 */}
-        <i className={classNameIcon}
-           aria-label={t('completeLabel')}
-           onClick={() => onToggleDone(id, isDone)} />
+        {isDone ?
+          <SquareCheck
+            className="icon-check"
+            aria-label={t('completeLabel')}
+            onClick={() => onToggleDone(id, isDone)}
+          /> :
+          <Square
+            className="icon-square"
+            aria-label={t('completeLabel')}
+            onClick={() => onToggleDone(id, isDone)}
+          />
+        }
         {isEdit ?
             <input
                 type="text"
@@ -36,10 +39,11 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
             <span aria-label={t('textLabel')}
                   onClick={() => onShowEdit(id)}>{text}</span>
           }
-        {/*  todo lucideに変更に変更 */}
-        <i className="fa fa-trash icon-trash"
-           aria-label={t('deleteLabel', {id})}
-           onClick={() => onRemoveTask(id)} />
+        <Trash2
+          className="icon-trash"
+          aria-label={t('deleteLabel', {id})}
+          onClick={() => onRemoveTask(id)}
+        />
       </li>
   
   );

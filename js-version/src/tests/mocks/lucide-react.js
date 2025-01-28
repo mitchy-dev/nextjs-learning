@@ -24,3 +24,6 @@ const IconMock = ({
 
 // Next.jsプロジェクトで使用している全てのアイコンをここでエクスポート
 export const Search = IconMock
+export const Square = IconMock
+export const SquareCheck = IconMock
+export const Trash2 = IconMock
