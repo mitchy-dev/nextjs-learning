@@ -6,13 +6,13 @@ import {todoInputPropTypes} from "../types/props";
 export function TodoInput ({ onSubmit}) {
   const t = useTranslations('TodoInput');
   return (
-      <div className="form">
-        <div className="inputArea">
-          <label htmlFor="todo-input" className="visually-hidden">{t('label')}</label>
+      <div className="p-form">
+        <div className="p-form__input-area">
+          <label htmlFor="todo-input" className="u-visually-hidden">{t('label')}</label>
           <input
               type="text"
               id="todo-input"
-              className="inputText"
+              className="c-input"
               defaultValue=""
               placeholder={t('placeholder')}
               onKeyUp={ onSubmit}

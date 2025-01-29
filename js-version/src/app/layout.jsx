@@ -1,8 +1,7 @@
 import {NextIntlClientProvider} from 'next-intl';
 import {getLocale, getMessages} from 'next-intl/server';
 import { Inter } from "next/font/google";
-import "./globals.css";
-import Script from "next/script";
+import '@/styles/style.scss';
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -3,7 +3,7 @@ import {todoListPropTypes} from "../types/props";
 
 export function TodoList ({tasks, handlers}) {
   return (
-      <ul className="list">
+      <ul className="p-todo-list">
         {tasks.map(task => (
             <TodoItem
                 task={task}

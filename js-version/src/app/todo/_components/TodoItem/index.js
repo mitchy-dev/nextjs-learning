@@ -10,7 +10,7 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
   
   const t = useTranslations('TodoItem');
   const classNameLi = classNames(
-   'list__item', {
+   'p-todo-list__item', {
         'is-done': isDone
       });
   const CheckBoxIcon = isDone ? SquareCheck : Square;
@@ -18,30 +18,33 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
       <li key={id} className={classNameLi}>
         <button
           type="button"
-          className="icon-button"
+          className="c-icon-button"
           aria-label={t('completeLabel')}
           onClick={() => onToggleDone(id, isDone)}
         >
-          <CheckBoxIcon className="icon-check icon-square"/>
+          <CheckBoxIcon className={isDone ? "c-icon c-icon--check" : "c-icon c-icon--square"}/>
         </button>
         {isEdit ?
             <input
                 type="text"
+                className="c-edit-input"
                 defaultValue={text}
                 aria-label={t('editLabel')}
                 onChange={(e) => onChangeText(id, e.target.value)}
                 onKeyUp={(e) => onConfirmEdit(e, id)}
             /> :
-            <span aria-label={t('textLabel')}
-                  onClick={() => onShowEdit(id)}>{text}</span>
+            <span
+                aria-label={t('textLabel')}
+                onClick={() => onShowEdit(id)}
+            >{text}</span>
         }
         <button
           type="button"
-          className="icon-button icon-button--trash"
+          className="c-icon-button u-icon-button--trash"
           aria-label={t('deleteLabel', {id})}
           onClick={() => onRemoveTask(id)}
         >
-          <Trash2 className="icon-trash"/>
+          <Trash2 className="c-icon c-icon--trash"/>
         </button>
       </li>
   
