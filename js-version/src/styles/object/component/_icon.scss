@@ -1,0 +1,26 @@
+.c-icon {
+  &--check {
+    font-size: 25px !important;
+    color: rgba(89, 158, 175, 0.29);
+    vertical-align: middle;
+  }
+
+  &--trash {
+    stroke-width: 2px;
+    width: 24px;
+    height: 24px;
+    color: rgba(175, 47, 47, 0.47);
+    vertical-align: middle;
+  }
+
+  &--square,
+  &--check {
+    margin-right: 15px;
+    vertical-align: middle;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+    transition: .5s transform;
+  }
+}

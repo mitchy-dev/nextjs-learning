@@ -1,0 +1,27 @@
+.c-button {
+  padding: 5px 30px;
+  background: #000;
+  color: #ffffff;
+  border: none;
+  text-align: right;
+  margin: 0;
+  font-size: 16px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.c-icon-button {
+  padding: 0;
+  border: none;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid #0066ff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
