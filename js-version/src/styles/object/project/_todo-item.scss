@@ -1,0 +1,19 @@
+.p-todo-item {
+  overflow: hidden;
+  padding: 15px 15px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8e8e8;
+  transition: .5s transform;
+
+  &__delete-button{
+    float: right;
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    transition: .5s transform;
+  }
+}

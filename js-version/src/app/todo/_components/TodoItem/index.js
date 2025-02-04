@@ -10,7 +10,7 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
   
   const t = useTranslations('TodoItem');
   const classNameLi = classNames(
-   'p-todo-list__item', {
+   'p-todo-item', {
         'is-done': isDone
       });
   const CheckBoxIcon = isDone ? SquareCheck : Square;
@@ -40,7 +40,7 @@ export function TodoItem ({task, handlers}) { //型に応じたpropsを渡す
         }
         <button
           type="button"
-          className="c-icon-button u-icon-button--trash"
+          className="c-icon-button p-todo-item__delete-button"
           aria-label={t('deleteLabel', {id})}
           onClick={() => onRemoveTask(id)}
         >
