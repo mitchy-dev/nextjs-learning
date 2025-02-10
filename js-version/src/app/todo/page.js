@@ -1,27 +1,29 @@
 "use client";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {TodoList} from "@/app/todo/_components/TodoList";
 import {useTodoHandlers} from "@/app/todo/_hooks/useTodos";
 import {TodoInput} from "@/app/todo/_components/TodoInput";
 import {TodoSearch} from "@/app/todo/_components/TodoSearch";
+import {fetchTodos} from "@/lib/todos";
 
 
 export default function Page() {
   const [keyword, setKeyword] = useState("");
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: 'todo1',
-      isEdit: false,
-      isDone: false,
-    },{
-      id: 2,
-      text: 'todo2',
-      isEdit: false,
-      isDone: true,
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
+  
+  useEffect(() => {
+    loadTodos();
+  }, []);
+  
+  async function loadTodos() {
+    try {
+      const todos = await fetchTodos();
+      setTasks(todos);
+    } catch (e) {
+      console.error(e);
+    }
+  }
   
   const handlers = useTodoHandlers(tasks, setTasks);
   function addTask(text) {
