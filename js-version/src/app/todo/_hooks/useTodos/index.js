@@ -1,8 +1,16 @@
+import {updateTodo} from "@/lib/todos";
+
 export const useTodoHandlers = (tasks, setTasks) => {
-  function handleToggleDone(id, isDone) {
-    setTasks(tasks.map((task) =>
-        task.id === id ? {...task, isDone: !isDone} : task
-    ));
+  
+  async function handleToggleDone(id, isDone) {
+    try {
+      const updatedTodo = await updateTodo(id, { isDone: !isDone,});
+      setTasks(tasks.map((task) =>
+          task.id === id ? updatedTodo : task
+      ));
+    } catch (e) {
+      console.error('Failed to toggle todo:', e);
+    }
   }
   function handleShowEdit(id) {
     setTasks(tasks.map((task) =>
