@@ -26,9 +26,15 @@ export const useTodoHandlers = (tasks, setTasks) => {
   function handleCloseEdit(id) {
     setTasks(tasks.map((task) => ({...task, isEdit: false})));
   }
-  function handleConfirmEdit(event, taskId) {
+  async function handleConfirmEdit(event, id) {
     if (event.key === 'Enter') {
-      handleCloseEdit(taskId);
+      try {
+        const targetTask = tasks.find((task) => task.id === id);
+        const updatedTodo = await updateTodo(id, { text: targetTask.text});
+        setTasks(tasks.map(task => task.id === id ? updatedTodo : task));
+      } catch (e) {
+        console.error('Failed to update todo text:', e);
+      }
     }
   }
   
