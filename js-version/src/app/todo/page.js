@@ -5,7 +5,7 @@ import {TodoList} from "@/app/todo/_components/TodoList";
 import {useTodoHandlers} from "@/app/todo/_hooks/useTodos";
 import {TodoInput} from "@/app/todo/_components/TodoInput";
 import {TodoSearch} from "@/app/todo/_components/TodoSearch";
-import {fetchTodos} from "@/lib/todos";
+import {fetchTodos, creteTodo} from "@/lib/todos";
 
 
 export default function Page() {
@@ -26,13 +26,18 @@ export default function Page() {
   }
   
   const handlers = useTodoHandlers(tasks, setTasks);
-  function addTask(text) {
-    setTasks([...tasks, {
-      id: Date.now(),
-      text: text,
-      isEdit: false,
-      isDone: false,
-    }]);
+  async function addTask(text) {
+    try {
+      const newTodo = {
+        text: text,
+        isEdit: false,
+        isDone: false,
+      };
+      const createdTodo = await creteTodo(newTodo);
+      setTasks([...tasks, createdTodo]);
+    } catch (e) {
+      console.error('Failed to add todo:', e);
+    }
   }
   function handleSubmit(event) {
     if (event.key === 'Enter') {
