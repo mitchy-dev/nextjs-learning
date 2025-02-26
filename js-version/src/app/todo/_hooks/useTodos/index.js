@@ -1,4 +1,4 @@
-import {updateTodo} from "@/lib/todos";
+import {deleteTodo, updateTodo} from "@/lib/todos";
 
 export const useTodoHandlers = (tasks, setTasks) => {
   
@@ -20,8 +20,14 @@ export const useTodoHandlers = (tasks, setTasks) => {
   function handleChangeText(id, text) {
     setTasks(tasks.map((task) => task.id === id ? {...task,  text: text} : task));
   }
-  function handleRemoveTask(id) {
-    setTasks(tasks.filter((task) => task.id !== id));
+  async function handleRemoveTask(id) {
+    try {
+      await deleteTodo(id);
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (e) {
+      console.error('Failed to delete todo:', e);
+    
+    }
   }
   function handleCloseEdit(id) {
     setTasks(tasks.map((task) => ({...task, isEdit: false})));
