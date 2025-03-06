@@ -1,11 +1,21 @@
 const API_URL = 'http://localhost:3030/todos';
 
 export async function fetchTodos() {
-  const response = await fetch(API_URL);
-  if (!response.ok){
-    throw new Error('Failed to fetch todos');
+  try {
+    const response = await fetch(API_URL);
+    // httpレスポンスがあった場合は正常系で処理
+    if (!response.ok){
+      throw new Error(`Server responded with status: ${response.status}`);
+    }
+    return response.json();
+  } catch (e) {
+    // httpレスポンスがない場合は異常系:TypeError
+    if (e.name === 'TypeError') {
+      throw new Error('Network error: Prease check your connection');
+    }
+    //その他の異常
+    throw e;
   }
-  return response.json();
 }
 
 export async function creteTodo(todo) {
