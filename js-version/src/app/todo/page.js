@@ -11,6 +11,7 @@ import {fetchTodos, creteTodo} from "@/lib/todos";
 export default function Page() {
   const [keyword, setKeyword] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState(null);
   
   useEffect(() => {
     loadTodos();
@@ -20,7 +21,9 @@ export default function Page() {
     try {
       const todos = await fetchTodos();
       setTasks(todos);
+      setError(null);
     } catch (e) {
+      setError('通信に失敗しました。');
       console.error(e);
     }
   }
@@ -48,11 +51,15 @@ export default function Page() {
     const regexp = new RegExp('^' + keyword, 'i');
     return task.text.match(regexp);
   }
-  
+  function handleError(message) {
+    setError(message);
+    setTimeout(() => setError(null), 2000);
+  }
   
   const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
   return (
       <>
+        {error && <div className="error-message">{error}</div> }
         <TodoInput onSubmit={handleSubmit} />
         <TodoSearch onChange={setKeyword} defaultValue={keyword} />
         <TodoList
