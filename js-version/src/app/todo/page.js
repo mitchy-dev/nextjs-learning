@@ -12,6 +12,7 @@ export default function Page() {
   const [keyword, setKeyword] = useState("");
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
     loadTodos();
@@ -19,12 +20,15 @@ export default function Page() {
   
   async function loadTodos() {
     try {
+      setLoading(true);
       const todos = await fetchTodos();
       setTasks(todos);
       setError(null);
     } catch (e) {
       setError('通信に失敗しました。');
       console.error(e);
+    } finally {
+      setLoading(false);
     }
   }
   
@@ -57,6 +61,7 @@ export default function Page() {
   }
   
   const visibleTasks = keyword ==='' ? tasks : tasks.filter((task) => searchTask(task));
+  
   return (
       <>
         {error && <div className="error-message">{error}</div> }
@@ -65,6 +70,7 @@ export default function Page() {
         <TodoList
             tasks={visibleTasks}
             handlers={handlers}
+            loading={loading}
         />
       </>
   );
