@@ -11,7 +11,7 @@ export async function fetchTodos() {
   } catch (e) {
     // httpレスポンスがない場合は異常系:TypeError
     if (e.name === 'TypeError') {
-      throw new Error('Network error: Prease check your connection');
+      throw new Error('Network error: Please check your connection');
     }
     //その他の異常
     throw e;
@@ -19,39 +19,58 @@ export async function fetchTodos() {
 }
 
 export async function creteTodo(todo) {
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(todo),
-  });
-  if (!response.ok) {
-    throw new Error('Failed to create todo')
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todo),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to create todo')
+    }
+    return response.json();
+  } catch (e) {
+    if (e.name === 'TyepError') {
+      throw new Error('Network error: Please check your connection');
+    }
+    throw e;
   }
-  return response.json();
 }
 
 export async function updateTodo(id, updates) {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(updates),
-  });
-  if (!response.ok) {
-    throw new Error('Failed to update todo');
+  try {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updates),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to update todo');
+    }
+    return response.json();
+  } catch (e) {
+    if (e.name === 'TypeError') {
+      throw new Error('Network error: Please check your connection');
+    }
   }
-  return response.json();
 }
 
 export async function deleteTodo(id) {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) {
-    throw new Error('Failed to delete todo');
+  try {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error('Failed to delete todo');
+    }
+    return response.json();
+  } catch (e) {
+    if (e.name === 'TypeError') {
+      throw new Error('Network error: Please check your connection');
+    }
   }
-  return response.json();
 }
