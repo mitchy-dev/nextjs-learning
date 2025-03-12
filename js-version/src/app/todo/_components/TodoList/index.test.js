@@ -1,4 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+
+import {render} from "@/test/test-utils";
 import {TodoList} from "./index";
 import {multipleTasks, mockPropsList, emptyTask, mockTodoHandlers} from "@/tests/factories/todo";
 import PropTypes from "prop-types";
@@ -20,7 +22,7 @@ describe("タスクリストコンポーネント", () => {
     expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
   });
   test("単一タスクの表示", () => {
-    render(<TodoList tasks={mockPropsList} handlers={mockTodoHandlers}  />);
+    render(<TodoList tasks={mockPropsList} handlers={mockTodoHandlers} loading={false}  />);
     expect(screen.getByRole('list')).toBeInTheDocument();
     expect(screen.getAllByRole('listitem')).toHaveLength(1);
     expect(screen.getByText('todo1')).toBeInTheDocument();
@@ -29,6 +31,7 @@ describe("タスクリストコンポーネント", () => {
     render(<TodoList
         tasks={multipleTasks}
         handlers={mockTodoHandlers}
+        loading={false}
      />);
     expect(screen.getByRole('list')).toBeInTheDocument();
     const listItems = screen.getAllByRole('listitem');
