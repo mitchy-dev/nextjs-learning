@@ -1,17 +1,19 @@
-const API_URL = 'http://localhost:3030/todos';
+import {API_ERRORS} from "@/lib/errorMessage";
+
+export const API_URL = 'http://localhost:3030/todos';
 
 export async function fetchTodos() {
   try {
     const response = await fetch(API_URL);
     // httpレスポンスがあった場合は正常系で処理
     if (!response.ok){
-      throw new Error(`Server responded with status: ${response.status}`);
+      throw new Error(API_ERRORS.SERVER_ERROR(response.status));
     }
     return response.json();
   } catch (e) {
     // httpレスポンスがない場合は異常系:TypeError
     if (e.name === 'TypeError') {
-      throw new Error('Network error: Please check your connection');
+      throw new Error(API_ERRORS.NETWORK_ERROR);
     }
     //その他の異常
     throw e;
