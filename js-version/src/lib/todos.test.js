@@ -1,5 +1,5 @@
-import {createMockTask} from "@/tests/factories/todo";
-import {API_URL, fetchTodos} from "@/lib/todos";
+import {createdTodoResponse, createMockTask, createNewTodoRequest} from "@/tests/factories/todo";
+import {API_URL, fetchTodos, creteTodo} from "@/lib/todos";
 import {API_ERRORS} from "@/lib/errorMessage";
 
 describe("Todos API Client", () => {
@@ -36,5 +36,32 @@ describe("Todos API Client", () => {
       fetchMock.mockRejectedValue(originalError);
       await expect(fetchTodos()).rejects.toBe(originalError);
     });
+  });
+  
+  describe("createTodo", () => {
+    test("正常系", async () => {
+      // リクエストデータ
+      const newTodoRequest = createNewTodoRequest();
+      // レスポンスデータ
+      const todoResponse = createdTodoResponse(newTodoRequest);
+      // fecthモックの処理
+      fetchMock.mockResolvedValue({
+        ok: true,
+        json: jest.fn().mockResolvedValue(todoResponse),
+      });
+      // 操作の実行
+      const result = await creteTodo(newTodoRequest);
+      // httpリクエストの検証
+      expect(fetch).toHaveBeenCalledWith(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newTodoRequest),
+      });
+      // レスポンスの検証
+      expect(result).toEqual(todoResponse);
+    });
+
   });
 });
