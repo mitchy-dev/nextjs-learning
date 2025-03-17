@@ -14,6 +14,20 @@ export const createMockTask = (overrides = {}) => ({
   isDone: false,
   ...overrides
 });
+export const createNewTodoRequest = (overrides = {}) => ({
+  text: 'todo1',
+  isEdit: false,
+  isDone: false,
+  ...overrides
+});
+export const createdTodoResponse = (overrides = {}) => {
+  const baseRequest = createNewTodoRequest(overrides);
+  return {
+    id: 1,
+    ...baseRequest,
+    ...overrides
+  };
+};
 export const mockTodoHandlers = {
   onToggleDone: jest.fn(),
   onShowEdit: jest.fn(),
