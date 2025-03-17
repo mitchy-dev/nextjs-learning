@@ -62,6 +62,22 @@ describe("Todos API Client", () => {
       // レスポンスの検証
       expect(result).toEqual(todoResponse);
     });
-
+    test("サーバーエラー", async () => {
+      fetchMock.mockResolvedValue({
+        ok: false,
+        status: 500,
+      });
+      await expect(creteTodo()).rejects.toThrow(API_ERRORS.SERVER_ERROR(500));
+    });
+    test("ネットワークエラー", async () => {
+      fetchMock.mockRejectedValue(new TypeError(API_ERRORS.NETWORK_ERROR));
+      await expect(creteTodo()).rejects.toThrow(API_ERRORS.NETWORK_ERROR);
+    });
+    test("その他の例外をそのまま処理", async () => {
+      const newTodoRequest = createNewTodoRequest();
+      const originalError = new Error(API_ERRORS.UNKNOWN_ERROR);
+      fetchMock.mockRejectedValue(originalError);
+      await expect(creteTodo(newTodoRequest)).rejects.toBe(originalError);
+    });
   });
 });

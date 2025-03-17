@@ -30,7 +30,7 @@ export async function creteTodo(todo) {
       body: JSON.stringify(todo),
     });
     if (!response.ok) {
-      throw new Error('Failed to create todo')
+      throw new Error(API_ERRORS.SERVER_ERROR(response.status));
     }
     return response.json();
   } catch (e) {
