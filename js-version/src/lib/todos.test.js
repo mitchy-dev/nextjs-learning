@@ -1,5 +1,5 @@
 import {createdTodoResponse, createMockTask, createNewTodoRequest} from "@/tests/factories/todo";
-import {API_URL, fetchTodos, creteTodo} from "@/lib/todos";
+import {API_URL, fetchTodos, creteTodo, updateTodo} from "@/lib/todos";
 import {API_ERRORS} from "@/lib/errorMessage";
 
 describe("Todos API Client", () => {
@@ -78,6 +78,44 @@ describe("Todos API Client", () => {
       const originalError = new Error(API_ERRORS.UNKNOWN_ERROR);
       fetchMock.mockRejectedValue(originalError);
       await expect(creteTodo(newTodoRequest)).rejects.toBe(originalError);
+    });
+  });
+  
+  describe("updateTodo", () => {
+    test("正常系：完了状態の更新", async () => {
+    //   モックタスク：更新前
+      const testCases = [
+        { from: false, to: true,},
+        { from: true, to: false,},
+      ];
+      for (const testCase of testCases) {
+        const initialTodo = createMockTask({ isDone: testCase.from,});
+        const updates =  { isDone: testCases.to };
+        //   モックタスク：更新後
+        const updatedTodo = {
+          ...initialTodo,
+          updates
+        };
+        fetchMock.mockReset();
+        //   APIレスポンスのモック
+        fetchMock.mockResolvedValue({
+          ok: true,
+          json: jest.fn().mockResolvedValue(updatedTodo),
+        });
+        //   APIクライアントの実行
+        const result = await updateTodo(initialTodo.id, updates);
+        
+        //   アサーション：APIコール
+        expect(fetch).toHaveBeenCalledWith(`${API_URL}/${initialTodo.id}`,{
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updates),
+        });
+        //   アサーション：APIレスポンスと更新後のモックタスク
+        expect(result).toEqual(updatedTodo);
+      }
     });
   });
 });
