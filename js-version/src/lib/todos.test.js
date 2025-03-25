@@ -117,5 +117,30 @@ describe("Todos API Client", () => {
         expect(result).toEqual(updatedTodo);
       }
     });
+    test("正常系：テキストの更新", async () => {
+      const testCase = { from: 'before', to: 'after',};
+      const initialTodo = createMockTask({ text: testCase.from,});
+      const updates =  { text: testCase.to };
+      const updatedTodo = {
+        ...initialTodo,
+        ...updates
+      };
+      //   APIレスポンスのモック
+      fetchMock.mockResolvedValue({
+        ok: true,
+        json: jest.fn().mockResolvedValue(updatedTodo),
+      });
+      //   APIクライアントの実行
+      const result = await updateTodo(initialTodo.id, updates);
+      expect(fetch).toHaveBeenCalledWith(`${API_URL}/${initialTodo.id}`,{
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updates),
+      });
+      //   アサーション：APIレスポンスと更新後のモックタスク
+      expect(result).toEqual(updatedTodo);
+    });
   });
 });
