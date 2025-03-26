@@ -142,5 +142,27 @@ describe("Todos API Client", () => {
       //   アサーション：APIレスポンスと更新後のモックタスク
       expect(result).toEqual(updatedTodo);
     });
+    test("異常系：サーバーエラー", async () => {
+      const initialTodo = createMockTask();
+      const updates = { text: 'update'};
+      fetchMock.mockResolvedValue({
+        ok: false,
+        status: 500,
+      });
+      await expect(updateTodo(initialTodo.id, updates)).rejects.toThrow(API_ERRORS.SERVER_ERROR(500));
+    });
+    test("異常系：ネットワークエラー", async () => {
+      const initialTodo = createMockTask();
+      const updates = { text: 'update',};
+      fetchMock.mockRejectedValue(new TypeError());
+      await expect(updateTodo(initialTodo.id, updates)).rejects.toThrow(API_ERRORS.NETWORK_ERROR);
+    });
+    test("異常系：その他の例外の処理", async () => { 
+      const initialTodo = createMockTask();
+      const updates = { text: 'update',};
+      const originalError = new Error(API_ERRORS.UNKNOWN_ERROR);
+      fetchMock.mockRejectedValue(originalError);
+      await expect(updateTodo(initialTodo.id, updates)).rejects.toBe(originalError);
+    });
   });
 });
