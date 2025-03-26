@@ -51,13 +51,14 @@ export async function updateTodo(id, updates) {
       body: JSON.stringify(updates),
     });
     if (!response.ok) {
-      throw new Error('Failed to update todo');
+      throw new Error(API_ERRORS.SERVER_ERROR(response.status));
     }
     return response.json();
   } catch (e) {
     if (e.name === 'TypeError') {
-      throw new Error('Network error: Please check your connection');
+      throw new Error(API_ERRORS.NETWORK_ERROR);
     }
+    throw e;
   }
 }
 
