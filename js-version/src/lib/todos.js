@@ -68,12 +68,17 @@ export async function deleteTodo(id) {
       method: 'DELETE',
     });
     if (!response.ok) {
-      throw new Error('Failed to delete todo');
+      throw new Error(API_ERRORS.SERVER_ERROR(response.status));
     }
-    return response.json();
+    
+    const data = response.json();
+    console.log(data);
+    return data;
+    // return response.json();
   } catch (e) {
-    if (e.name === 'TypeError') {
-      throw new Error('Network error: Please check your connection');
+    if (e instanceof TypeError) {
+      throw new Error(API_ERRORS.NETWORK_ERROR);
     }
+    throw e;
   }
 }
