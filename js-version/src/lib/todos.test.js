@@ -1,5 +1,5 @@
 import {createdTodoResponse, createMockTask, createNewTodoRequest} from "@/tests/factories/todo";
-import {API_URL, fetchTodos, creteTodo, updateTodo} from "@/lib/todos";
+import {API_URL, fetchTodos, creteTodo, updateTodo, deleteTodo} from "@/lib/todos";
 import {API_ERRORS} from "@/lib/errorMessage";
 
 describe("Todos API Client", () => {
@@ -163,6 +163,46 @@ describe("Todos API Client", () => {
       const originalError = new Error(API_ERRORS.UNKNOWN_ERROR);
       fetchMock.mockRejectedValue(originalError);
       await expect(updateTodo(initialTodo.id, updates)).rejects.toBe(originalError);
+    });
+  });
+  describe("deleteTodo", () => {
+    test("正常系：削除成功", async () => {
+    //   最初のタスク
+      const targetTask = createMockTask();
+      const deletedTaskResponse = {
+        id: targetTask.id,
+        isDone: targetTask.isDone,
+        isEdit: targetTask.isEdit,
+        text: targetTask.text,
+      }
+      fetchMock.mockResolvedValue({
+        ok: true,
+        json: jest.fn().mockResolvedValue(deletedTaskResponse),
+      });
+      const result = await deleteTodo(targetTask.id);
+      expect(fetch).toHaveBeenCalledWith(`${API_URL}/${targetTask.id}`,{
+        method: 'DELETE',
+      });
+      expect(result).toEqual(deletedTaskResponse);
+    });
+    test("異常系：サーバーエラーの処理", async () => {
+      const targetTask = createMockTask();
+      fetchMock.mockResolvedValue({
+        ok: false,
+        status: 500,
+      });
+      await expect(deleteTodo(targetTask.id)).rejects.toThrow(API_ERRORS.SERVER_ERROR(500));
+    });
+    test("異常系：ネットワークエラー", async () => {
+      const targetTask = createMockTask();
+      fetchMock.mockRejectedValue( new TypeError());
+      await expect(deleteTodo(targetTask.id)).rejects.toThrow(API_ERRORS.NETWORK_ERROR);
+    });
+    test("異常系：その他の例外をそのまま処理", async () => {
+      const targetTask = createMockTask();
+      const originalError = new Error();
+      fetchMock.mockRejectedValue(originalError);
+      await expect(deleteTodo(targetTask.id)).rejects.toBe(originalError);
     });
   });
 });
