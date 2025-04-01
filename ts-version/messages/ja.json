@@ -1,0 +1,16 @@
+{
+  "TodoSearch": {
+    "placeholder": "キーワードを入力",
+    "label": "タスクを検索"
+  },
+  "TodoInput": {
+    "placeholder": "タスクを入力",
+    "label": "タスクを作成"
+  },
+  "TodoItem": {
+    "completeLabel": "タスクの完了状態",
+    "editLabel": "タスク編集",
+    "textLabel": "タスクのテキスト",
+    "deleteLabel": "タスク削除{id}"
+  }
+}
